@@ -85,4 +85,15 @@ describe('article reducer', () => {
 
         expect(newState).to.not.eql(initialState);
     });
+    it('updates the state with the correct data when succesfully receiving one specific article', () => {
+        const article = 'article1';
+        const article_id = '5a0b3622eccf201ad70df0a4';
+        const prevState = articleReducer(initialState, articleActions.fetchArticlesRequest(article_id)); 
+        const action = articleActions.fetchArticlesSuccess(article);
+        const newState = articleReducer(prevState, action);
+
+        expect(newState.loading).to.be.false;
+        expect(newState.error).to.be.null;
+        expect(newState.data).to.eql(article);
+    });
 });
