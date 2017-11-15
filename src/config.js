@@ -1,0 +1,1 @@
+export const API_URL = 'https://az-northcoders-news-back-end.herokuapp.com/api';
