@@ -16,13 +16,13 @@ export const fetchArticlesFailure = error => ({
     payload: error
 });
 
-export const fetchArticles = (id) => {
+export const fetchArticles = (article_id) => {
     return (dispatch) => {
-        const PATH = id ? `articles/${id}` : 'articles';
+        const PATH = article_id ? `articles/${article_id}` : 'articles';
         dispatch(fetchArticlesRequest());
         return axios.get(`${API_URL}/${PATH}`)
         .then(res => {
-            if (id) {
+            if (article_id) {
                 dispatch(fetchArticlesSuccess(res.data))
             } else {
                 dispatch(fetchArticlesSuccess(res.data.articles))
