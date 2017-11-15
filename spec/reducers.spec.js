@@ -57,4 +57,10 @@ describe('article reducer', () => {
 
         expect(newState).to.not.eql(prevState);
     });
+    it('returns the previous state when passed an invalid action', () => {
+        const action = {type:'Andrea'};
+        const newState = articleReducer(initialState, action);
+
+        expect(newState).to.eql(initialState);
+    });
 });
