@@ -78,7 +78,7 @@ describe('article reducer', () => {
         expect(newState.error).to.be.null;
         expect(newState.data).to.eql([]);
     });
-    it('does not modify the original state when handling a request action', () => {
+    it('does not modify the original state when handling a request by article id action', () => {
         const article_id = '5a0b3622eccf201ad70df0a4';
         const action = articleActions.fetchArticlesRequest(article_id);
         const newState = articleReducer(initialState, action);
@@ -95,5 +95,14 @@ describe('article reducer', () => {
         expect(newState.loading).to.be.false;
         expect(newState.error).to.be.null;
         expect(newState.data).to.eql(article);
+    });
+    it('does not modify the original state when handling a succesfull fetch by article id action', () => {
+        const article = 'article1';
+        const article_id = '5a0b3622eccf201ad70df0a4';
+        const prevState = articleReducer(initialState, articleActions.fetchArticlesRequest(article_id));
+        const action = articleActions.fetchArticlesSuccess(article);
+        const newState = articleReducer(initialState, action);
+
+        expect(newState).to.not.eql(initialState);
     });
 });
