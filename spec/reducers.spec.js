@@ -14,4 +14,9 @@ describe('article reducer', () => {
         expect(newState.error).to.be.null;
         expect(newState.data).to.eql([]);
     });
+    it('does not modify the original state when handling a request action', () => {
+        const action = articleActions.fetchArticlesRequest();
+        const newState = articleReducer(initialState, action);
+        expect(newState).to.not.eql(initialState);
+    });
 });
