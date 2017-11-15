@@ -49,4 +49,12 @@ describe('article reducer', () => {
         expect(newState.error).to.equal(error);
         expect(newState.data).to.eql([]);
     });
+    it('does not modify the original state when handling a fetch failure action', () => {
+        const error = 'error - unsuccessful request';
+        const prevState = articleReducer(initialState, articleActions.fetchArticlesRequest()); 
+        const action = articleActions.fetchArticlesFailure(error);
+        const newState = articleReducer(prevState, action);
+
+        expect(newState).to.not.eql(prevState);
+    });
 });
