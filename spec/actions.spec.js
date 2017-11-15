@@ -31,7 +31,7 @@ describe('async actions', () => {
               ];
               const store = mockStore();
 
-              return store.dispatch(getArticles())
+              return store.dispatch(articleActions.fetchArticles())
               .then(() => {
                 expect(store.getActions()).to.eql(expectedActions);
               });

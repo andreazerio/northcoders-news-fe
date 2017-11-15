@@ -18,7 +18,7 @@ export const fetchArticlesFailure = error => ({
 
 export const fetchArticles = () => {
     return (dispatch) => {
-        const PATH = '/articles';
+        const PATH = 'articles';
         dispatch(fetchArticlesRequest());
         return axios.get(`${API_URL}/${PATH}`)
         .then(res => dispatch(fetchArticlesSuccess(res.data.articles)))
