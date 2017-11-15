@@ -10,6 +10,7 @@ describe('article reducer', () => {
     it('updates the state loading property when requesting articles', () => {
         const action = articleActions.fetchArticlesRequest();
         const newState = articleReducer(initialState, action);
+
         expect(newState.loading).to.be.true;
         expect(newState.error).to.be.null;
         expect(newState.data).to.eql([]);
@@ -17,6 +18,17 @@ describe('article reducer', () => {
     it('does not modify the original state when handling a request action', () => {
         const action = articleActions.fetchArticlesRequest();
         const newState = articleReducer(initialState, action);
+
         expect(newState).to.not.eql(initialState);
+    });
+    it('updates the state with the correct data when succesfully receiving articles', () => {
+        const data = ['article1', 'article2', 'article3'];
+        const prevState = articleReducer(initialState, articleActions.fetchArticlesRequest()); 
+        const action = articleActions.fetchArticlesSuccess(data);
+        const newState = articleReducer(prevState, action);
+
+        expect(newState.loading).to.be.false;
+        expect(newState.error).to.be.null;
+        expect(newState.data).to.eql(data);
     });
 });
