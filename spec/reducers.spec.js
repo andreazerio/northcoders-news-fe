@@ -7,4 +7,11 @@ describe('article reducer', () => {
     it('exists', () => {
         expect(articleReducer).to.be.a("function");
     });
+    it('updates the state loading property when requesting articles', () => {
+        const action = articleActions.fetchArticlesRequest();
+        const newState = articleReducer(initialState, action);
+        expect(newState.loading).to.be.true;
+        expect(newState.error).to.be.null;
+        expect(newState.data).to.eql([]);
+    });
 });
