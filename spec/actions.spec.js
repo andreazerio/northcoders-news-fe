@@ -53,6 +53,25 @@ describe('async actions', () => {
                 expect(store.getActions()).to.eql(expectedActions);
               });
           });
+          it('dispatches fetchArticlesSuccess with the correct id as argument when recieving data with status code 200', () => {
+            const article_id = '5a0b3622eccf201ad70df0a4';
+            const article = {message: 'successfully fetched single article'};
+
+            nock(API_URL)
+            .get(`/articles/${article_id}`)
+            .reply(200, article.message);
+
+            const expectedActions = [
+                articleActions.fetchArticlesRequest(),
+                articleActions.fetchArticlesSuccess(article.message)
+              ];
+              const store = mockStore();
+
+              return store.dispatch(articleActions.fetchArticles(article_id))
+              .then(() => {
+                expect(store.getActions()).to.eql(expectedActions);
+              });
+          });
     });
 });
 
