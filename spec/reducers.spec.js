@@ -7,6 +7,18 @@ describe('article reducer', () => {
     it('exists', () => {
         expect(articleReducer).to.be.a("function");
     });
+    it('returns the previous state when passed an invalid action', () => {
+        const action = {type:'Andrea'};
+        const newState = articleReducer(initialState, action);
+
+        expect(newState).to.eql(initialState);
+    });
+    it('returns the initial state when first argument is undefined', () => {
+        const action = {type:'Andrea'};
+        const newState = articleReducer(undefined, action);
+
+        expect(newState).to.eql(initialState);
+    });
     it('updates the state loading property when requesting articles', () => {
         const action = articleActions.fetchArticlesRequest();
         const newState = articleReducer(initialState, action);
@@ -57,16 +69,13 @@ describe('article reducer', () => {
 
         expect(newState).to.not.eql(prevState);
     });
-    it('returns the previous state when passed an invalid action', () => {
-        const action = {type:'Andrea'};
+    it('updates the state loading property when requesting an article by id', () => {
+        const article_id = '5a0b3622eccf201ad70df0a4';
+        const action = articleActions.fetchArticlesRequest(article_id);
         const newState = articleReducer(initialState, action);
 
-        expect(newState).to.eql(initialState);
-    });
-    it('returns the initial state when first argument is undefined', () => {
-        const action = {type:'Andrea'};
-        const newState = articleReducer(undefined, action);
-
-        expect(newState).to.eql(initialState);
+        expect(newState.loading).to.be.true;
+        expect(newState.error).to.be.null;
+        expect(newState.data).to.eql([]);
     });
 });
