@@ -39,4 +39,14 @@ describe('article reducer', () => {
 
         expect(newState).to.not.eql(prevState);
     });
+    it('updates the state correctly when recieving an error message', () => {
+        const error = 'error - unsuccessful request';
+        const prevState = articleReducer(initialState, articleActions.fetchArticlesRequest()); 
+        const action = articleActions.fetchArticlesFailure(error);
+        const newState = articleReducer(prevState, action);
+
+        expect(newState.loading).to.be.false;
+        expect(newState.error).to.equal(error);
+        expect(newState.data).to.eql([]);
+    });
 });
