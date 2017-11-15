@@ -78,4 +78,11 @@ describe('article reducer', () => {
         expect(newState.error).to.be.null;
         expect(newState.data).to.eql([]);
     });
+    it('does not modify the original state when handling a request action', () => {
+        const article_id = '5a0b3622eccf201ad70df0a4';
+        const action = articleActions.fetchArticlesRequest(article_id);
+        const newState = articleReducer(initialState, action);
+
+        expect(newState).to.not.eql(initialState);
+    });
 });
