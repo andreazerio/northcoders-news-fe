@@ -16,12 +16,18 @@ export const fetchArticlesFailure = error => ({
     payload: error
 });
 
-export const fetchArticles = () => {
+export const fetchArticles = (id) => {
     return (dispatch) => {
-        const PATH = 'articles';
+        const PATH = id ? `/articles/${id}` : '/articles';
         dispatch(fetchArticlesRequest());
         return axios.get(`${API_URL}/${PATH}`)
-        .then(res => dispatch(fetchArticlesSuccess(res.data.articles)))
+        .then(res => {
+            if (id) {
+                dispatch(fetchArticlesSuccess(res.data))
+            } else {
+                dispatch(fetchArticlesSuccess(res.data.articles))
+            }
+        })
         .catch(error => dispatch(fetchArticlesFailure(error.message)))
     };
 };
