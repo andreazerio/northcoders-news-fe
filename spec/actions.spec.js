@@ -72,6 +72,25 @@ describe('async actions', () => {
                 expect(store.getActions()).to.eql(expectedActions);
               });
           });
+          it('dispatches fetchArticlesFailure when receiving an error', () => {
+              const invalid_article_id = 'Andrea';
+              const error = {message: 'error - article_id not valid'}
+            nock(API_URL)
+            .get(`/articles/${invalid_article_id}`)
+              .replyWithError(error.message);
+            
+            const expectedActions = [
+                articleActions.fetchArticlesRequest(),
+                articleActions.fetchArticlesFailure(error.message)
+            ];
+      
+            const store = mockStore();
+      
+            return store.dispatch(articleActions.fetchArticles(invalid_article_id))
+              .then(() => {
+                expect(store.getActions()).to.eql(expectedActions);
+              });
+          });
     });
 });
 
