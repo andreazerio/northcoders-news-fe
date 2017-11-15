@@ -18,7 +18,7 @@ describe('async actions', () => {
         it('exists', () => {
             expect(articleActions.fetchArticles).to.be.a('function');
         });
-        it('dispatches FETCH_ARTICLES_SUCCESS when recieving data with status code 200', () => {
+        it('dispatches fetchArticlesSuccess when recieving data with status code 200', () => {
             nock(API_URL)
             .get('/articles')
             .reply(200, {
@@ -36,6 +36,23 @@ describe('async actions', () => {
                 expect(store.getActions()).to.eql(expectedActions);
               });
         });
+        it('dispatches fetchArticlesFailure when receiving an error', () => {
+            nock(API_URL)
+              .get('/articles')
+              .replyWithError({'message': 'error'});
+            
+            const expectedActions = [
+                articleActions.fetchArticlesRequest(),
+                articleActions.fetchArticlesFailure('error')
+            ];
+      
+            const store = mockStore();
+      
+            return store.dispatch(articleActions.fetchArticles())
+              .then(() => {
+                expect(store.getActions()).to.eql(expectedActions);
+              });
+          });
     });
 });
 
