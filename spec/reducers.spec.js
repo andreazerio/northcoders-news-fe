@@ -63,4 +63,10 @@ describe('article reducer', () => {
 
         expect(newState).to.eql(initialState);
     });
+    it('returns the initial state when first argument is undefined', () => {
+        const action = {type:'Andrea'};
+        const newState = articleReducer(undefined, action);
+
+        expect(newState).to.eql(initialState);
+    });
 });
