@@ -214,6 +214,25 @@ describe('async actions', () => {
                     expect(store.getActions()).to.eql(expectedActions);
                   });
               });
+              it('dispatches fetchCommentsFailure when receiving an error', () => {
+                const invalid_article_id = 'Andrea';
+                const error = {message: 'error - article_id not valid'}
+              nock(API_URL)
+              .get(`/articles/${invalid_article_id}/comments`)
+                .replyWithError(error.message);
+              
+              const expectedActions = [
+                  commentsActions.fetchCommentsRequest(),
+                  commentsActions.fetchCommentsFailure(error.message)
+              ];
+        
+              const store = mockStore();
+        
+              return store.dispatch(commentsActions.fetchComments(invalid_article_id))
+                .then(() => {
+                  expect(store.getActions()).to.eql(expectedActions);
+                });
+            });
         });
     });
 });
