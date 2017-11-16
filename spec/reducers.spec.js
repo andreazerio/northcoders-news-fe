@@ -122,6 +122,15 @@ describe('article reducer', () => {
             expect(newState.error).to.equal(error);
             expect(newState.data).to.eql([]);
         });
+        it('does not modify the original state when handling a fetch failure action', () => {
+            const error = 'error - unsuccessful request';
+            const article_id = '5a0b3622eccf201ad70df0a4';
+            const prevState = articleReducer(initialState, articleActions.fetchArticlesRequest(article_id)); 
+            const action = articleActions.fetchArticlesFailure(error);
+            const newState = articleReducer(prevState, action);
+    
+            expect(newState).to.not.eql(prevState);
+        });
     });
     
     describe('fetchArticlesByTopic(topic_id)', () => {
@@ -160,6 +169,26 @@ describe('article reducer', () => {
             const newState = articleReducer(prevState, action);
     
             expect(newState).to.not.eql(initialState);
+        });
+        it('updates the state correctly when recieving an error message from a fetch by article_id action', () => {
+            const error = 'error - unsuccessful request';
+            const topic_id = '5a0b3622eccf201ad70df0a1';
+            const prevState = articleReducer(initialState, articleActions.fetchArticlesRequest(topic_id)); 
+            const action = articleActions.fetchArticlesFailure(error);
+            const newState = articleReducer(prevState, action);
+    
+            expect(newState.loading).to.be.false;
+            expect(newState.error).to.equal(error);
+            expect(newState.data).to.eql([]);
+        });
+        it('does not modify the original state when handling a fetch failure action', () => {
+            const error = 'error - unsuccessful request';
+            const topic_id = '5a0b3622eccf201ad70df0a1';
+            const prevState = articleReducer(initialState, articleActions.fetchArticlesRequest(topic_id)); 
+            const action = articleActions.fetchArticlesFailure(error);
+            const newState = articleReducer(prevState, action);
+    
+            expect(newState).to.not.eql(prevState);
         });
     });
 });
