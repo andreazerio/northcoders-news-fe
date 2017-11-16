@@ -137,6 +137,35 @@ describe('async actions', () => {
         });
 
     });
+
+    describe('putArticle', () => {
+        it('exists', () => {
+            expect(articleActions.putArticle).to.be.a('function');
+        });
+        it('dispatches putArticlesSuccess with the correct article_id and vote as arguments when recieving data with status code 200', () => {
+            const article_id = '5a0b3622eccf201ad70df0a4';
+            const vote = 'up'
+            const data = {
+                id: article_id,
+                votes: 1
+            };
+
+            nock(API_URL)
+            .put(`/articles/${article_id}?vote=${vote}`)
+            .reply(200, data);
+
+            const expectedActions = [
+                articleActions.putArticleRequest(article_id, vote),
+                articleActions.putArticleSuccess(data)
+              ];
+              const store = mockStore();
+
+              return store.dispatch(articleActions.putArticle(article_id, vote))
+              .then(() => {
+                expect(store.getActions()).to.eql(expectedActions);
+              });
+          });
+    });
 });
 
 

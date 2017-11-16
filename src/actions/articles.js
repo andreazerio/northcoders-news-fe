@@ -16,7 +16,7 @@ export const fetchArticlesFailure = error => ({
     payload: error
 });
 
-export const putArticleRequest = () => ({
+export const putArticleRequest = (article_id, vote) => ({
     type: types.PUT_ARTICLE_REQUEST
 });
 
