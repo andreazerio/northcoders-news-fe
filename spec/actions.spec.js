@@ -92,6 +92,32 @@ describe('async actions', () => {
               });
           });
     });
+
+    describe('fetchArticlesByTopic', () => {
+        it('exists', () => {
+            expect(articleActions.fetchArticlesByTopic).to.be.a('function');
+        });
+        it('dispatches fetchArticlesSuccess with the correct topic id as argument when recieving data with status code 200', () => {
+            const topic_id = 'football';
+            const articles = {data: ['article1', 'article2', 'article3']};
+
+            nock(API_URL)
+            .get(`/topics/${topic_id}/articles`)
+            .reply(200, {articles});
+
+            const expectedActions = [
+                articleActions.fetchArticlesRequest(),
+                articleActions.fetchArticlesSuccess(articles)
+              ];
+              const store = mockStore();
+
+              return store.dispatch(articleActions.fetchArticlesByTopic(topic_id))
+              .then(() => {
+                expect(store.getActions()).to.eql(expectedActions);
+              });
+          });
+
+    });
 });
 
 

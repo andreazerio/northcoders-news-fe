@@ -31,3 +31,18 @@ export const fetchArticles = (article_id) => {
         .catch(error => dispatch(fetchArticlesFailure(error.message)))
     };
 };
+
+export const fetchArticlesByTopic = (topic_id) => {
+    return (dispatch) => {
+        const PATH = `topics/${topic_id}/articles`;
+        dispatch(fetchArticlesRequest());
+        return axios.get(`${API_URL}/${PATH}`)
+            .then(res => {
+                console.log(res.data)
+                dispatch(fetchArticlesSuccess(res.data.articles))
+            })
+            .catch(error => {
+                dispatch(fetchArticlesFailure(error.message));
+            });
+    }
+}
