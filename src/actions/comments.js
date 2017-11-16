@@ -46,7 +46,7 @@ export const fetchComments = article_id => {
 export const postComment = (id, body) => {
     return(dispatch) => {
         dispatch(postCommentRequest(id, body));
-        return axios.post(`${API_URL}/articles/${id}/comments`)
+        return axios.post(`${API_URL}/articles/${id}/comments`, body)
         .then(res => {
             dispatch(postCommentSuccess(res.data.comment))
         })

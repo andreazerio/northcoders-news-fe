@@ -179,7 +179,7 @@ describe('async actions', () => {
                 expect(commentsActions.fetchComments).to.be.a('function');
             })
             it('dispatches fetchCommentsSuccess with the correct article_id as argument when recieving data with status code 200', () => {
-                const article_id = '5a0b3622eccf201ad70df0a4'
+                const article_id = '5a0b3622eccf201ad70df0a4';
                 const comments = {data: ['comment1', 'comment2', 'comment3']};
     
                 nock(API_URL)
@@ -215,6 +215,34 @@ describe('async actions', () => {
                 .then(() => {
                   expect(store.getActions()).to.eql(expectedActions);
                 });
+            });
+        });
+    });
+
+    describe('postComment', () => {
+        it('exists', () => {
+            expect(commentsActions.postComment).to.be.a('function');
+        });
+        it('dispatches postCommentsSuccess with the correct article_id as argument when recieving data with status code 200', () => {
+            const article_id = '5a0b3622eccf201ad70df0a4';
+            const comment = {
+                body:'comment test',
+                created_by: 'northcoder'
+            }
+            nock(API_URL)
+            .post(`/articles/${article_id}/comments`, comment)
+            .reply(201, {comment});
+      
+          const expectedActions = [
+            commentsActions.postCommentRequest(article_id, comment),
+            commentsActions.postCommentSuccess(comment)
+          ];
+      
+          const store = mockStore();
+          
+          return store.dispatch(commentsActions.postComment(article_id, comment))
+            .then(() => {
+              expect(store.getActions()).to.eql(expectedActions);
             });
         });
     });
