@@ -211,5 +211,33 @@ describe('article reducer', () => {
     
             expect(newState).to.not.eql(initialState);
         });
+        it('updates the state with the correct data when succesfully voting on an article', () => {
+            const vote = 'up';
+            const article_id = '5a0b3622eccf201ad70df0a1';
+            const article = {
+                id: article_id,
+                vote: 1
+            };
+            const prevState = articleReducer(initialState, articleActions.putArticleRequest(article_id)); 
+            const action = articleActions.putArticleSuccess(article);
+            const newState = articleReducer(prevState, action);
+    
+            expect(newState.loading).to.be.false;
+            expect(newState.error).to.be.null;
+            expect(newState.data).to.eql(article);
+        });
+        it('does not modify the original state when handling a succesfull postArticle action', () => {
+            const vote = 'up';
+            const article_id = '5a0b3622eccf201ad70df0a1';
+            const article = {
+                id: article_id,
+                vote: 1
+            };
+            const prevState = articleReducer(initialState, articleActions.putArticleRequest(article_id)); 
+            const action = articleActions.putArticleSuccess(article);
+            const newState = articleReducer(prevState, action);
+    
+            expect(newState).to.not.eql(initialState);
+        });
     });
 });
