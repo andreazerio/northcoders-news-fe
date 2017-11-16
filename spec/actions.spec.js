@@ -192,7 +192,28 @@ describe('async actions', () => {
 
     describe('comments actions', () => {
         describe('fetchComments', () => {
-
+            it('exists', () => {
+                expect(commentsActions.fetchComments).to.be.a('function');
+            })
+            it('dispatches fetchCommentsSuccess with the correct article_id as argument when recieving data with status code 200', () => {
+                const article_id = '5a0b3622eccf201ad70df0a4'
+                const comments = {data: ['comment1', 'comment2', 'comment3']};
+    
+                nock(API_URL)
+                .get(`/articles/${article_id}/comments`)
+                .reply(200, {comments});
+    
+                const expectedActions = [
+                    commentsActions.fetchCommentsRequest(),
+                    commentsActions.fetchCommentsSuccess(comments)
+                  ];
+                  const store = mockStore();
+    
+                  return store.dispatch(commentsActions.fetchComments(article_id))
+                  .then(() => {
+                    expect(store.getActions()).to.eql(expectedActions);
+                  });
+              });
         });
     });
 });
