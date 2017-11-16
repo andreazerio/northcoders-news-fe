@@ -298,5 +298,25 @@ describe('comment reducer', () => {
     
             expect(newState).to.not.eql(initialState);
         });
+        it('updates the state with the correct data when succesfully receiving comments for a particular article', () => {
+            const comments = ['comments1', 'comments2', 'comments3'];
+            const article_id = '5a0b3622eccf201ad70df0a4';
+            const prevState = commentReducer(initialState, commentsActions.fetchCommentsRequest(article_id)); 
+            const action = commentsActions.fetchCommentsSuccess(comments);
+            const newState = commentReducer(prevState, action);
+    
+            expect(newState.loading).to.be.false;
+            expect(newState.error).to.be.null;
+            expect(newState.data).to.eql(comments);
+        });
+        it('does not modify the original state when handling a succesfull fetch by article_id action', () => {
+            const comments = ['comments1', 'comments2', 'comments3'];
+            const article_id = '5a0b3622eccf201ad70df0a4';
+            const prevState = commentReducer(initialState, commentsActions.fetchCommentsRequest(article_id)); 
+            const action = commentsActions.fetchCommentsSuccess(comments);
+            const newState = commentReducer(prevState, action);
+    
+            expect(newState).to.not.eql(initialState);
+        });
     });
 });
