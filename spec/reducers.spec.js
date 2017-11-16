@@ -191,4 +191,25 @@ describe('article reducer', () => {
             expect(newState).to.not.eql(prevState);
         });
     });
+
+    describe('putArticles(article_id, vote)', () => {
+        it('updates the state loading property when updating an article votes', () => {
+            const article_id = '5a0b3622eccf201ad70df0a4';
+            const vote = 'down';
+            const action = articleActions.putArticleRequest(article_id, vote);
+            const newState = articleReducer(initialState, action);
+    
+            expect(newState.loading).to.be.true;
+            expect(newState.error).to.be.null;
+            expect(newState.data).to.eql([]);
+        });
+        it('does not modify the original state when handling a request by article_id action', () => {
+            const article_id = '5a0b3622eccf201ad70df0a4';
+            const vote = 'down';
+            const action = articleActions.putArticleRequest(article_id, vote);
+            const newState = articleReducer(initialState, action);
+    
+            expect(newState).to.not.eql(initialState);
+        });
+    });
 });
