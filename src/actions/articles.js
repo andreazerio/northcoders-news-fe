@@ -16,6 +16,20 @@ export const fetchArticlesFailure = error => ({
     payload: error
 });
 
+export const putArticleRequest = () => ({
+    type: types.PUT_ARTICLE_REQUEST
+});
+
+export const putArticleSuccess = data => ({
+    type: types.PUT_ARTICLE_SUCCESS,
+    payload: data
+});
+
+export const putArticleFailure = error => ({
+    type: types.FETCH_ARTICLES_FAILURE,
+    payload: error
+});
+
 export const fetchArticles = (article_id) => {
     return (dispatch) => {
         const PATH = article_id ? `articles/${article_id}` : 'articles';
@@ -38,11 +52,24 @@ export const fetchArticlesByTopic = (topic_id) => {
         dispatch(fetchArticlesRequest());
         return axios.get(`${API_URL}/${PATH}`)
             .then(res => {
-                console.log(res.data)
                 dispatch(fetchArticlesSuccess(res.data.articles))
             })
             .catch(error => {
                 dispatch(fetchArticlesFailure(error.message));
             });
-    }
-}
+    };
+};
+
+export const putArticle = (article_id, vote) => {
+    return (dispatch) => {
+        const PATH = `articles/${article_id}?vote=${vote}`;
+        dispatch(putArticleRequest());
+        return axios.put(`${API_URL}/${PATH}`)
+        .then(res => {
+            dispatch(putArticleSuccess(res.data));
+        })
+        .catch(error => {
+            dispatch(putArticleFailure(error.message))
+        });
+    };
+};

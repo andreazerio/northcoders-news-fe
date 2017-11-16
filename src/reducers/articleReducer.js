@@ -30,5 +30,28 @@ export default (prevState = initialState, action) => {
         newState.data = [];
         return newState;
     }
+    if (action.type === types.PUT_ARTICLE_REQUEST) {
+        let newState = Object.assign({}, prevState);
+        newState.loading = true;
+        newState.error = null;
+        newState.data = [];
+        return newState;
+    }
+    if (action.type === types.PUT_ARTICLE_SUCCESS) {
+        let newState = Object.assign({}, prevState);
+        const articles = action.payload;
+        newState.loading = false;
+        newState.error = null;
+        newState.data = articles;
+        return newState;
+    }
+    if (action.type === types.PUT_ARTICLE_FAILURE) {
+        let newState = Object.assign({}, prevState);
+        const error = action.payload;
+        newState.loading = false;
+        newState.error = error;
+        newState.data = [];
+        return newState;
+    }
     return prevState;
 };
