@@ -1,7 +1,9 @@
 import { expect } from 'chai';
 import articleReducer, {initialState} from '../src/reducers/articleReducer';
+import commentReducer from '../src/reducers/commentReducer';
 import * as types from '../src/types/index';
 import * as articleActions from '../src/actions/articles';
+import * as commentsActions from '../src/actions/comments'
 
 describe('article reducer', () => {
     it('exists', () => {
@@ -259,5 +261,23 @@ describe('article reducer', () => {
     
             expect(newState).to.not.eql(prevState);
         });
+    });
+});
+
+describe('comment reducer', () => {
+    it('exists', () => {
+        expect(commentReducer).to.be.a('function');
+    });
+    it('returns the previous state when passed an invalid action', () => {
+        const action = {type:'Andrea'};
+        const newState = commentReducer(initialState, action);
+
+        expect(newState).to.eql(initialState);
+    });
+    it('returns the initial state when first argument is undefined', () => {
+        const action = {type:'Andrea'};
+        const newState = commentReducer(undefined, action);
+
+        expect(newState).to.eql(initialState);
     });
 });
