@@ -125,5 +125,14 @@ describe('article reducer', () => {
     });
     
     describe('fetchArticlesByTopic(topic_id)', () => {
+        it('updates the state loading property when requesting an article by topic_id', () => {
+            const topic_id = '5a0b3622eccf201ad70df0a1';
+            const action = articleActions.fetchArticlesRequest(topic_id);
+            const newState = articleReducer(initialState, action);
+    
+            expect(newState.loading).to.be.true;
+            expect(newState.error).to.be.null;
+            expect(newState.data).to.eql([]);
+        });
     });
 });
