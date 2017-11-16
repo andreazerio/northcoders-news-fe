@@ -245,6 +245,29 @@ describe('async actions', () => {
               expect(store.getActions()).to.eql(expectedActions);
             });
         });
+        it('dispatches postCommentFailure when receiving an error', () => {
+            const comment = {
+                body:'comment test',
+                created_by: 'northcoder'
+            }
+            const error = 'article not found';
+            const invalid_article_id = 'andrea';
+            nock(API_URL)
+              .post(`/articles/${invalid_article_id}/comments`, comment)
+              .replyWithError({'message': error});
+            
+            const expectedActions = [
+              commentsActions.postCommentRequest(invalid_article_id, comment),
+              commentsActions.postCommentFailure(error) 
+            ];
+            
+            const store = mockStore();
+        
+            return store.dispatch(commentsActions.postComment(invalid_article_id, comment))
+              .then(() => {
+                expect(store.getActions()).to.eql(expectedActions);
+              });
+        });
     });
 });
 
