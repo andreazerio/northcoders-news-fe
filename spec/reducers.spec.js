@@ -134,5 +134,32 @@ describe('article reducer', () => {
             expect(newState.error).to.be.null;
             expect(newState.data).to.eql([]);
         });
+        it('does not modify the original state when handling a request by article_id action', () => {
+            const topic_id = '5a0b3622eccf201ad70df0a1';
+            const action = articleActions.fetchArticlesRequest(topic_id);
+            const newState = articleReducer(initialState, action);
+    
+            expect(newState).to.not.eql(initialState);
+        });
+        it('updates the state with the correct data when succesfully receiving articles by topic', () => {
+            const article = ['article1', 'article2', 'article3'];
+            const topic_id = '5a0b3622eccf201ad70df0a1';
+            const prevState = articleReducer(initialState, articleActions.fetchArticlesRequest(topic_id)); 
+            const action = articleActions.fetchArticlesSuccess(article);
+            const newState = articleReducer(prevState, action);
+    
+            expect(newState.loading).to.be.false;
+            expect(newState.error).to.be.null;
+            expect(newState.data).to.eql(article);
+        });
+        it('does not modify the original state when handling a succesfull fetch by article_id action', () => {
+            const article = ['article1', 'article2', 'article3'];
+            const topic_id = '5a0b3622eccf201ad70df0a1';
+            const prevState = articleReducer(initialState, articleActions.fetchArticlesRequest(topic_id)); 
+            const action = articleActions.fetchArticlesSuccess(article);
+            const newState = articleReducer(prevState, action);
+    
+            expect(newState).to.not.eql(initialState);
+        });
     });
 });
