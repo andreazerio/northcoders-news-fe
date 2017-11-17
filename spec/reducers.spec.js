@@ -365,5 +365,32 @@ describe('comment reducer', () => {
     
             expect(newState).to.not.eql(initialState);
         });
+        it('updates the state with the correct data when succesfully posting a comment', () => {
+            const comment = {
+                body:'comment test',
+                created_by: 'northcoder'
+            };
+            const article_id = '5a0b3622eccf201ad70df0a4';
+            const prevState = commentReducer(initialState, commentsActions.postCommentRequest(article_id, comment)); 
+            const action = commentsActions.postCommentSuccess(comment);
+            const newState = commentReducer(prevState, action);
+    
+            expect(newState.loading).to.be.false;
+            expect(newState.error).to.be.null;
+            expect(newState.data).to.eql(comment);
+        });
+        it('does not modify the original state when handling a succesfull post comment action', () => {
+            const comment = {
+                body:'comment test',
+                created_by: 'northcoder'
+            };
+            const article_id = '5a0b3622eccf201ad70df0a4';
+            const prevState = commentReducer(initialState, commentsActions.postCommentRequest(article_id, comment)); 
+            const action = commentsActions.postCommentSuccess(comment);
+            const newState = commentReducer(prevState, action);
+    
+    
+            expect(newState).to.not.eql(initialState);
+        });
     });
 });
