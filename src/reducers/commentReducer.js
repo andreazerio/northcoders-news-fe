@@ -22,8 +22,30 @@ export default (prevState = initialState, action) => {
         newState.data = comments;
         return newState;
     }
-
     if (action.type === types.FETCH_COMMENTS_FAILURE) {
+        let newState = Object.assign({}, prevState);
+        const error = action.payload;
+        newState.loading = false;
+        newState.error = error;
+        newState.data = [];
+        return newState;
+    }
+    if (actions.type === types.POST_COMMENT_REQUEST) {
+        let newState = Object.assign({}, prevState);
+        newState.loading = true;
+        newState.error = null;
+        newState.data = [];
+        return newState;
+    }
+    if (action.type === types.POST_COMMENT_REQUEST) {
+        let newState = Object.assign({}, prevState);
+        const comments = action.payload;
+        newState.loading = false;
+        newState.error = null;
+        newState.data = comments;
+        return newState;
+    }
+    if (action.type === types.POST_COMMENT_FAILURE) {
         let newState = Object.assign({}, prevState);
         const error = action.payload;
         newState.loading = false;

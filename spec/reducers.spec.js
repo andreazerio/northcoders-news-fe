@@ -339,4 +339,8 @@ describe('comment reducer', () => {
             expect(newState).to.not.eql(prevState);
         });
     });
+
+    describe('postComment', () => {
+        
+    });
 });
