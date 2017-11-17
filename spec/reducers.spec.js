@@ -341,6 +341,29 @@ describe('comment reducer', () => {
     });
 
     describe('postComment', () => {
-        
+        it('updates the state loading property when requesting to post a comment', () => {
+            const article_id = '5a0b3622eccf201ad70df0a4';
+            const comment = {
+                body:'comment test',
+                created_by: 'northcoder'
+            };
+            const action = commentsActions.postCommentRequest(article_id, comment);
+            const newState = commentReducer(initialState, action);
+    
+            expect(newState.loading).to.be.true;
+            expect(newState.error).to.be.null;
+            expect(newState.data).to.eql([]);
+        });
+        it('does not modify the original state when handling a post request action', () => {
+            const article_id = '5a0b3622eccf201ad70df0a4';
+            const comment = {
+                body:'comment test',
+                created_by: 'northcoder'
+            };
+            const action = commentsActions.postCommentRequest(article_id, comment);
+            const newState = commentReducer(initialState, action);
+    
+            expect(newState).to.not.eql(initialState);
+        });
     });
 });
