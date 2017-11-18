@@ -30,9 +30,9 @@ export const postCommentFailure = (err) => ({
     payload: err
 });
 
-export const putCommentRequest = (comment_id, vote) => {
-    type:types.PUT_COMMENT_REQUEST
-};
+export const putCommentRequest = (comment_id, vote) => ({
+    type: types.PUT_COMMENT_REQUEST
+});
 
 export const putCommentSuccess = data => ({
     type:types.PUT_COMMENT_SUCCESS,
@@ -73,13 +73,13 @@ export const postComment = (article_id, body) => {
 export const putComment = (comment_id, vote) => {
     return (dispatch) => {
         const PATH = `comments/${comment_id}?vote=${vote}`;
-        dispatch(putArticleRequest());
+        dispatch(putCommentRequest(comment_id, vote));
         return axios.put(`${API_URL}/${PATH}`)
         .then(res => {
-            dispatch(putArticleSuccess(res.data));
+            dispatch(putCommentSuccess(res.data));
         })
         .catch(error => {
-            dispatch(putArticleFailure(error.message))
+            dispatch(putCommentFailure(error.message))
         });
     };
 };

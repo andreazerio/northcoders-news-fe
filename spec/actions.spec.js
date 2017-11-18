@@ -269,6 +269,36 @@ describe('async actions', () => {
               });
         });
     });
+
+    describe('putComment', () => {
+        it('exists', () => {
+            expect(commentsActions.putComment).to.be.a('function');
+        });
+        it('dispatches putCommentSuccess with the correct comment_id and vote as arguments when recieving data with status code 200', () => {
+            const comment_id = '5a0b3623eccf201ad70df0cb';
+            const vote = 'up'
+            const data = {
+                id: comment_id,
+                votes: 1
+            };
+
+            nock(API_URL)
+            .put(`/comments/${comment_id}?vote=${vote}`)
+            .reply(200, data);
+
+            const expectedActions = [
+                commentsActions.putCommentRequest(comment_id, vote),
+                commentsActions.putCommentSuccess(data)
+              ];
+              const store = mockStore();
+
+              return store.dispatch(commentsActions.putComment(comment_id, vote))
+              .then(() => {
+                expect(store.getActions()).to.eql(expectedActions);
+              });
+          });
+
+    });
 });
 
 

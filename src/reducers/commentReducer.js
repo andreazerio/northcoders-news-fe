@@ -53,7 +53,7 @@ export default (prevState = initialState, action) => {
         newState.data = [];
         return newState;
     }
-    if (action.type === types.POST_COMMENT_REQUEST) {
+    if (action.type === types.PUT_COMMENT_REQUEST) {
         let newState = Object.assign({}, prevState);
         newState.loading = true;
         newState.error = null;
