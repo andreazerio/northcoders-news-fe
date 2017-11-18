@@ -297,6 +297,26 @@ describe('async actions', () => {
                 expect(store.getActions()).to.eql(expectedActions);
               });
           });
+          it('dispatches putCommentFailure when receiving an error', () => {
+            const vote = 'up';
+            const invalid_comment_id = 'Andrea';
+            const error = {message: 'error - comment_id not valid'}
+          nock(API_URL)
+          .put(`/comments/${invalid_comment_id}?vote=${vote}`)
+            .replyWithError(error.message);
+          
+          const expectedActions = [
+              commentsActions.putCommentRequest(),
+              commentsActions.putCommentFailure(error.message)
+          ];
+    
+          const store = mockStore();
+    
+          return store.dispatch(commentsActions.putComment(invalid_comment_id, vote))
+            .then(() => {
+              expect(store.getActions()).to.eql(expectedActions);
+            });
+        });
 
     });
 });
