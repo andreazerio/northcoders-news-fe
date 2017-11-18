@@ -228,7 +228,7 @@ describe('article reducer', () => {
             expect(newState.error).to.be.null;
             expect(newState.data).to.eql(article);
         });
-        it('does not modify the original state when handling a succesfull postArticle action', () => {
+        it('does not modify the original state when handling a succesfull putArticle action', () => {
             const vote = 'up';
             const article_id = '5a0b3622eccf201ad70df0a1';
             const article = {
@@ -241,7 +241,7 @@ describe('article reducer', () => {
     
             expect(newState).to.not.eql(initialState);
         });
-        it('updates the state correctly when recieving an error message from a postArticle action', () => {
+        it('updates the state correctly when recieving an error message from a putArticle action', () => {
             const error = 'error - unsuccessful request';
             const article_id = '5a0b3622eccf201ad70df0a1';
             const prevState = articleReducer(initialState, articleActions.putArticleRequest(article_id)); 
@@ -433,7 +433,25 @@ describe('comment reducer', () => {
             expect(newState.error).to.be.null;
             expect(newState.data).to.eql([]);
         });
-        it('does not modify the original state when handling a request by comment_id action', () => {
+        it('does not modify the original state when handling a putCommentRequest action', () => {
+            const comment_id = '5a0b3623eccf201ad70df0cb';
+            const vote = 'down';
+            const action = commentsActions.putCommentRequest(comment_id, vote);
+            const newState = commentReducer(initialState, action);
+    
+            expect(newState).to.not.eql(initialState);
+        });
+        it('updates the state with the correct data when succesfully voting on a comment', () => {
+            const comment_id = '5a0b3623eccf201ad70df0cb';
+            const vote = 'down';
+            const action = commentsActions.putCommentRequest(comment_id, vote);
+            const newState = commentReducer(initialState, action);
+    
+            expect(newState.loading).to.be.true;
+            expect(newState.error).to.be.null;
+            expect(newState.data).to.eql([]);
+        });
+        it('does not modify the original state when handling a putCommentSuccess action', () => {
             const comment_id = '5a0b3623eccf201ad70df0cb';
             const vote = 'down';
             const action = commentsActions.putCommentRequest(comment_id, vote);
