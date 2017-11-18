@@ -30,6 +30,20 @@ export const postCommentFailure = (err) => ({
     payload: err
 });
 
+export const putCommentRequest = (comment_id, vote) => {
+    type:types.PUT_COMMENT_REQUEST
+};
+
+export const putCommentSuccess = data => ({
+    type:types.PUT_COMMENT_SUCCESS,
+    payload: data
+});
+
+export const putCommentFailure = err => ({
+    type: types.PUT_COMMENT_FAILURE,
+    payload: err
+});
+
 export const fetchComments = article_id => {
     return (dispatch) => {
         dispatch(fetchCommentsRequest());
@@ -41,7 +55,7 @@ export const fetchComments = article_id => {
                 dispatch(fetchCommentsFailure(error.message));
             });
     };
-}
+};
 
 export const postComment = (article_id, body) => {
     return(dispatch) => {
@@ -54,4 +68,18 @@ export const postComment = (article_id, body) => {
             dispatch(postCommentFailure(error.message))
         });
     };
-}
+};
+
+export const putComment = (comment_id, vote) => {
+    return (dispatch) => {
+        const PATH = `comments/${comment_id}?vote=${vote}`;
+        dispatch(putArticleRequest());
+        return axios.put(`${API_URL}/${PATH}`)
+        .then(res => {
+            dispatch(putArticleSuccess(res.data));
+        })
+        .catch(error => {
+            dispatch(putArticleFailure(error.message))
+        });
+    };
+};
