@@ -459,5 +459,26 @@ describe('comment reducer', () => {
     
             expect(newState).to.not.eql(initialState);
         });
+        it('updates the state correctly when recieving an error message from a putComment action', () => {
+            const error = 'error - unsuccessful request';
+            const comment_id = '5a0b3622eccf201ad70df0a1';
+            const prevState = commentReducer(initialState, commentsActions.putCommentRequest(comment_id)); 
+            const action = commentsActions.putCommentFailure(error);
+            const newState = commentReducer(prevState, action);
+    
+            expect(newState.loading).to.be.false;
+            expect(newState.error).to.equal(error);
+            expect(newState.data).to.eql([]);
+        });
+        it('does not modify the original state when handling a fetch failure action', () => {
+            const error = 'error - unsuccessful request';
+            const comment_id = '5a0b3622eccf201ad70df0a1';
+            const prevState = commentReducer(initialState, commentsActions.putCommentRequest(comment_id)); 
+            const action = commentsActions.putCommentFailure(error);
+            const newState = commentReducer(prevState, action);
+    
+            expect(newState).to.not.eql(prevState);
+        });
     });
+
 });
