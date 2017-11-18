@@ -423,23 +423,23 @@ describe('comment reducer', () => {
     });
 
     describe('putComment', () => {
-        // it('updates the state loading property when updating a comment votes', () => {
-        //     const comment_id = '5a0b3623eccf201ad70df0cb';
-        //     const vote = 'down';
-        //     const action = commentsActions.putCommentRequest(comment_id, vote);
-        //     const newState = commentReducer(initialState, action);
+        it('updates the state loading property when updating a comment votes', () => {
+            const comment_id = '5a0b3623eccf201ad70df0cb';
+            const vote = 'down';
+            const action = commentsActions.putCommentRequest(comment_id, vote);
+            const newState = commentReducer(initialState, action);
     
-        //     expect(newState.loading).to.be.true;
-        //     expect(newState.error).to.be.null;
-        //     expect(newState.data).to.eql([]);
-        // });
-        // it('does not modify the original state when handling a request by comment_id action', () => {
-        //     const comment_id = '5a0b3623eccf201ad70df0cb';
-        //     const vote = 'down';
-        //     const action = commentsActions.putCommentRequest(comment_id, vote);
-        //     const newState = commentReducer(initialState, action);
+            expect(newState.loading).to.be.true;
+            expect(newState.error).to.be.null;
+            expect(newState.data).to.eql([]);
+        });
+        it('does not modify the original state when handling a request by comment_id action', () => {
+            const comment_id = '5a0b3623eccf201ad70df0cb';
+            const vote = 'down';
+            const action = commentsActions.putCommentRequest(comment_id, vote);
+            const newState = commentReducer(initialState, action);
     
-        //     expect(newState).to.not.eql(initialState);
-        // });
+            expect(newState).to.not.eql(initialState);
+        });
     });
 });
