@@ -319,6 +319,12 @@ describe('async actions', () => {
         });
 
     });
+
+    describe('deleteComment', () => {
+        it('exists', () => {
+            expect(commentsActions.deleteComment).to.be.a('function');
+        });
+    });
 });
 
 

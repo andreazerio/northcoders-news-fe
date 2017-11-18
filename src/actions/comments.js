@@ -44,6 +44,20 @@ export const putCommentFailure = err => ({
     payload: err
 });
 
+export const deleteCommentRequest = comment_id => ({
+    type: types.DELETE_COMMENT_REQUEST
+  });
+  
+  export const deleteCommentSuccess = data => ({
+    type: types.DELETE_COMMENT_SUCCESS,
+    payload: data
+  });
+  
+  export const deleteCommentFailure = err => ({
+    type: types.DELETE_COMMENT_FAILURE,
+    payload: err
+  });
+
 export const fetchComments = article_id => {
     return (dispatch) => {
         dispatch(fetchCommentsRequest());
@@ -83,3 +97,17 @@ export const putComment = (comment_id, vote) => {
         });
     };
 };
+
+export const deleteComment = (comment_id) => {
+    return (dispatch) => {
+        const PATH = `comments/${comment_id}`;
+      dispatch(deleteCommentRequest(comment_id));
+      return axios.delete(`${API_URL}/${PATH}`)
+        .then((res) => {
+          dispatch(deleteCommentSuccess(res.data));
+        })
+        .catch(error => {
+          dispatch(deleteCommentFailure(error.message));
+        });
+    };
+  };
