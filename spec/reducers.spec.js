@@ -562,6 +562,24 @@ describe('topic reducer', () => {
     
             expect(newState).to.not.eql(initialState);
         });
+        it('updates the state with the correct data when succesfully receiving topics', () => {
+            const data = ['topic1', 'topic2', 'topic3'];
+            const prevState = topicReducer(initialState, topicsActions.fetchTopicsRequest()); 
+            const action = topicsActions.fetchTopicsSuccess(data);
+            const newState = topicReducer(prevState, action);
+    
+            expect(newState.loading).to.be.false;
+            expect(newState.error).to.be.null;
+            expect(newState.data).to.eql(data);
+        });
+        it('does not modify the original state when handling a succesful fetchTopics action', () => {
+            const data = ['topic1', 'topic2', 'topic3'];
+            const prevState = topicReducer(initialState, topicsActions.fetchTopicsRequest()); 
+            const action = topicsActions.fetchTopicsSuccess(data);
+            const newState = topicReducer(prevState, action);
+    
+            expect(newState).to.not.eql(prevState);
+        });
     });
 
 });
