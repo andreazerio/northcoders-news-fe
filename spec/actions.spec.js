@@ -384,6 +384,24 @@ describe('topics actions', () => {
                 expect(store.getActions()).to.eql(expectedActions);
               });
         });
+        it('dispatches fetchCommentsFailure when receiving an error', () => {
+            const error = {message: 'error - topics not available'}
+          nock(API_URL)
+          .get(`/topics`)
+            .replyWithError(error.message);
+          
+          const expectedActions = [
+              topicsActions.fetchTopicsRequest(),
+              topicsActions.fetchTopicsFailure(error.message)
+          ];
+    
+          const store = mockStore();
+    
+          return store.dispatch(topicsActions.fetchTopics())
+            .then(() => {
+              expect(store.getActions()).to.eql(expectedActions);
+            });
+        });
     });
 });
 
