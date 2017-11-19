@@ -324,6 +324,24 @@ describe('async actions', () => {
         it('exists', () => {
             expect(commentsActions.deleteComment).to.be.a('function');
         });
+        it('dispatches deleteCommentSuccess action when recieving an action with status code of 200', () => {
+            const comment_id = '5a0b3623eccf201ad70df0cb';
+            nock(API_URL)
+              .delete(`/comments/${comment_id}`) 
+              .reply(204, {});
+      
+            const expectedActions = [
+              commentsActions.deleteCommentRequest(comment_id),
+              commentsActions.deleteCommentSuccess({})
+            ];
+      
+            const store = mockStore();
+      
+            return store.dispatch(commentsActions.deleteComment(comment_id))
+              .then(() => {
+                expect(store.getActions()).to.eql(expectedActions);
+              });
+        });
     });
 });
 
