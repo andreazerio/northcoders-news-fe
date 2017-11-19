@@ -481,4 +481,23 @@ describe('comment reducer', () => {
         });
     });
 
+    describe('deleteComment', () => {
+        it('updates the state loading property when requesting to delete a comment', () => {
+            const comment_id = '5a0b3623eccf201ad70df0cb';
+            const action = commentsActions.deleteCommentRequest(comment_id);
+            const newState = commentReducer(initialState, action);
+    
+            expect(newState.loading).to.be.true;
+            expect(newState.error).to.be.null;
+            expect(newState.data).to.eql([]);
+        });
+        it('does not modify the original state when handling a putCommentRequest action', () => {
+            const comment_id = '5a0b3623eccf201ad70df0cb';
+            const action = commentsActions.deleteCommentRequest(comment_id);
+            const newState = commentReducer(initialState, action);
+    
+            expect(newState).to.not.eql(initialState);
+        });
+    });
+
 });
