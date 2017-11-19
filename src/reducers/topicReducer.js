@@ -7,14 +7,14 @@ export const initialState = {
 };
 
 export default (prevState = initialState, action) => {
-    if (action.type === types.FETCH_TOPIC_REQUEST) {
+    if (action.type === types.FETCH_TOPICS_REQUEST) {
         let newState = Object.assign({}, prevState);
         newState.loading = true;
         newState.error = null;
         newState.data = [];
         return newState;
     }
-    if (action.type === types.FETCH_TOPIC_SUCCESS) {
+    if (action.type === types.FETCH_TOPICS_SUCCESS) {
         let newState = Object.assign({}, prevState);
         const comments = action.payload;
         newState.loading = false;
@@ -22,7 +22,7 @@ export default (prevState = initialState, action) => {
         newState.data = comments;
         return newState;
     }
-    if (action.type === types.FETCH_TOPIC_FAILURE) {
+    if (action.type === types.FETCH_TOPICS_FAILURE) {
         let newState = Object.assign({}, prevState);
         const error = action.payload;
         newState.loading = false;

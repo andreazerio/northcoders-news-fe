@@ -1,9 +1,11 @@
 import { expect } from 'chai';
 import articleReducer, {initialState} from '../src/reducers/articleReducer';
 import commentReducer from '../src/reducers/commentReducer';
+import topicReducer from '../src/reducers/topicReducer';
 import * as types from '../src/types/index';
 import * as articleActions from '../src/actions/articles';
 import * as commentsActions from '../src/actions/comments'
+import * as topicsActions from '../src/actions/topics'
 
 describe('article reducer', () => {
     it('exists', () => {
@@ -537,6 +539,28 @@ describe('comment reducer', () => {
             const newState = commentReducer(prevState, action);
     
             expect(newState).to.not.eql(prevState);
+        });
+    });
+});
+
+describe('topic reducer', () => {
+    it('exists', () => {
+        expect(topicReducer).to.be.a('function');
+    });
+    describe('fetchTopics', () => {
+        it('updates the state loading property when requesting topics', () => {
+            const action = topicsActions.fetchTopicsRequest();
+            const newState = topicReducer(initialState, action);
+    
+            expect(newState.loading).to.be.true;
+            expect(newState.error).to.be.null;
+            expect(newState.data).to.eql([]);
+        });
+        it('does not modify the original state when handling a request action', () => {
+            const action = topicsActions.fetchTopicsRequest();
+            const newState = topicReducer(initialState, action);
+    
+            expect(newState).to.not.eql(initialState);
         });
     });
 
