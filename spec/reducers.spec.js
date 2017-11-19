@@ -580,6 +580,24 @@ describe('topic reducer', () => {
     
             expect(newState).to.not.eql(prevState);
         });
+        it('updates the state correctly when recieving an error message', () => {
+            const error = 'error - unsuccessful request';
+            const prevState = topicReducer(initialState, topicsActions.fetchTopicsRequest()); 
+            const action = topicsActions.fetchTopicsFailure(error);
+            const newState = topicReducer(prevState, action);
+    
+            expect(newState.loading).to.be.false;
+            expect(newState.error).to.equal(error);
+            expect(newState.data).to.eql([]);
+        });
+        it('does not modify the original state when handling a fetch failure action', () => {
+            const error = 'error - unsuccessful request';
+            const prevState = topicReducer(initialState, topicsActions.fetchTopicsRequest()); 
+            const action = topicsActions.fetchTopicsFailure(error);
+            const newState = topicReducer(prevState, action);
+    
+            expect(newState).to.not.eql(prevState);
+        });
     });
 
 });
