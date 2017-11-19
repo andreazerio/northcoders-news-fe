@@ -443,13 +443,17 @@ describe('comment reducer', () => {
         });
         it('updates the state with the correct data when succesfully voting on a comment', () => {
             const comment_id = '5a0b3623eccf201ad70df0cb';
+            const comment = {
+                id: comment_id,
+                votes: 1
+            }
             const vote = 'down';
-            const action = commentsActions.putCommentRequest(comment_id, vote);
+            const action = commentsActions.putCommentSuccess(comment);
             const newState = commentReducer(initialState, action);
     
-            expect(newState.loading).to.be.true;
+            expect(newState.loading).to.be.false;
             expect(newState.error).to.be.null;
-            expect(newState.data).to.eql([]);
+            expect(newState.data).to.eql(comment);
         });
         it('does not modify the original state when handling a putCommentSuccess action', () => {
             const comment_id = '5a0b3623eccf201ad70df0cb';
@@ -494,6 +498,22 @@ describe('comment reducer', () => {
         it('does not modify the original state when handling a putCommentRequest action', () => {
             const comment_id = '5a0b3623eccf201ad70df0cb';
             const action = commentsActions.deleteCommentRequest(comment_id);
+            const newState = commentReducer(initialState, action);
+    
+            expect(newState).to.not.eql(initialState);
+        });
+        it('updates the state with the correct data when succesfully deleting comment', () => {
+            const comment_id = '5a0b3623eccf201ad70df0cb';
+            const action = commentsActions.deleteCommentSuccess({message: 'comment deleted'});
+            const newState = commentReducer(initialState, action);
+    
+            expect(newState.loading).to.be.false;
+            expect(newState.error).to.be.null;
+            expect(newState.data.message).to.eql('comment deleted');
+        });
+        it('does not modify the original state when handling a putCommentSuccess action', () => {
+            const comment_id = '5a0b3623eccf201ad70df0cb';
+            const action = commentsActions.deleteCommentSuccess({message: 'comment deleted'});
             const newState = commentReducer(initialState, action);
     
             expect(newState).to.not.eql(initialState);

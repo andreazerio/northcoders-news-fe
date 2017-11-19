@@ -96,7 +96,7 @@ export const putComment = (comment_id, vote) => {
             dispatch(putCommentFailure(error.message))
         });
     };
-};
+};  
 
 export const deleteComment = (comment_id) => {
     return (dispatch) => {
