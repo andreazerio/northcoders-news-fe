@@ -342,6 +342,25 @@ describe('async actions', () => {
                 expect(store.getActions()).to.eql(expectedActions);
               });
         });
+        it('dispatches deleteCommentFailure when receiving an error', () => {
+            const invalid_comment_id = 'Andrea';
+            const error = {message: 'error - comment_id not valid'}
+          nock(API_URL)
+          .delete(`/comments/${invalid_comment_id}`)
+            .replyWithError(error.message);
+          
+          const expectedActions = [
+              commentsActions.deleteCommentRequest(),
+              commentsActions.deleteCommentFailure(error.message)
+          ];
+    
+          const store = mockStore();
+    
+          return store.dispatch(commentsActions.deleteComment(invalid_comment_id))
+            .then(() => {
+              expect(store.getActions()).to.eql(expectedActions);
+            });
+        });
     });
 });
 
