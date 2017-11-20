@@ -1,8 +1,9 @@
 import {combineReducers} from 'redux'
-import articles from './articles';
-import comments from './comments';
+import articles from './articleReducer';
+import comments from './commentReducer';
+import topics from './topicReducer';
 const reducer = combineReducers ({
- articles, comments
-})
+ articles, comments, topics
+});
 
 export default reducer;

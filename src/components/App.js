@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './NavBar'
-
+import NewsList from './NewsList'
 class App extends Component {
   render() {
     return (
@@ -10,6 +10,12 @@ class App extends Component {
       <section className='section'>
       <div className="App">
       <NavBar />
+      <Switch>
+        <Route 
+                exact path="/"
+                component={NewsList}
+        />
+      </Switch>
       </div>
       </section>
       </BrowserRouter>
