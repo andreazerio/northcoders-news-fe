@@ -15,6 +15,14 @@ class App extends Component {
                 exact path="/"
                 component={NewsList}
         />
+        <Route
+                exact path="/popular"
+                component={NewsList}
+              />
+        <Route
+                exact path="/topics/:topic"
+                component={NewsList}
+              />
       </Switch>
       </div>
       </section>

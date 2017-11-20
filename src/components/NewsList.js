@@ -39,8 +39,6 @@ class NewsList extends React.Component {
         const style = {
             margin: '10px'
         }
-        console.log('props ----->',this.props);
-        console.log('state ----->', this.state)
         let { articles } = this.props;
         const order = this.props.match.url;
         if (order === "/popular" && Array.isArray(articles)) {
