@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import '../App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import NavBar from './NavBar'
-import NewsList from './NewsList'
+import NavBar from './NavBar';
+import NewsList from './NewsList';
+import Article from './Article';
 class App extends Component {
   render() {
     return (
@@ -22,6 +23,10 @@ class App extends Component {
         <Route
                 exact path="/topics/:topic"
                 component={NewsList}
+              />
+        <Route
+                exact path='/articles/:id'
+                component={Article}
               />
       </Switch>
       </div>
