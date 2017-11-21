@@ -369,27 +369,55 @@ describe('comment reducer', () => {
         });
         it('updates the state with the correct data when succesfully posting a comment', () => {
             const comment = {
+                _id: '5',
                 body:'comment test',
-                created_by: 'northcoder'
+                belongs_to:'test article 1',
+                created_by: 'test person 5'
             };
+
+            const dataSet1 =  [
+                {_id: '1', body: 'test1', belongs_to: 'test article 1', created_by: 'test person 1'},
+                {_id: '2', body: 'test2', belongs_to: 'test article 1', created_by: 'test person 2'},
+                {_id: '3', body: 'test3', belongs_to: 'test article 1', created_by: 'test person 3'},
+                {_id: '4', body: 'test4', belongs_to: 'test article 1', created_by: 'test person 4'}
+            ]
+
+            const state = {
+                loading: false,
+                error: null,
+                data: dataSet1
+            }
             const article_id = '5a0b3622eccf201ad70df0a4';
-            const prevState = commentReducer(initialState, commentsActions.postCommentRequest(article_id, comment)); 
             const action = commentsActions.postCommentSuccess(comment);
-            const newState = commentReducer(prevState, action);
+            const newState = commentReducer(state, action);
     
             expect(newState.loading).to.be.false;
             expect(newState.error).to.be.null;
-            expect(newState.data).to.eql(prevState.data.concat(comment));
+            expect(newState.data).to.eql(state.data.concat(comment));
         });
         it('does not modify the original state when handling a succesfull post comment action', () => {
             const comment = {
+                _id: '5',
                 body:'comment test',
-                created_by: 'northcoder'
+                belongs_to:'test article 1',
+                created_by: 'test person 5'
             };
+
+            const dataSet1 =  [
+                {_id: '1', body: 'test1', belongs_to: 'test article 1', created_by: 'test person 1'},
+                {_id: '2', body: 'test2', belongs_to: 'test article 1', created_by: 'test person 2'},
+                {_id: '3', body: 'test3', belongs_to: 'test article 1', created_by: 'test person 3'},
+                {_id: '4', body: 'test4', belongs_to: 'test article 1', created_by: 'test person 4'}
+            ]
+
+            const state = {
+                loading: false,
+                error: null,
+                data: dataSet1
+            }
             const article_id = '5a0b3622eccf201ad70df0a4';
-            const prevState = commentReducer(initialState, commentsActions.postCommentRequest(article_id, comment)); 
             const action = commentsActions.postCommentSuccess(comment);
-            const newState = commentReducer(prevState, action);
+            const newState = commentReducer(state, action);
     
     
             expect(newState).to.not.eql(initialState);
