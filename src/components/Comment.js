@@ -1,6 +1,6 @@
 import React from 'react';
 import PT from 'prop-types';
-// import VotingIcons from './VotingIcons'
+import VotingIcons from './VotingIcons'
 
 class Comment extends React.Component {
     render () {
@@ -10,7 +10,7 @@ class Comment extends React.Component {
                 <p>
                     {this.props.comment.body}
                 </p>
-                {/* //<VotingIcons /> */}
+                <VotingIcons />
             </div>
             // <div className="box">
             //     <p><strong>{this.props.comment.created_by}:</strong> {this.props.comment.body}</p>

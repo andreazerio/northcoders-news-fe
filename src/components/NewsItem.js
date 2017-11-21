@@ -44,7 +44,6 @@ class NewsItem extends React.Component {
     }
 
     render() {
-        console.log('real props===>',this.props)
         return (
             <div className="uk-card uk-card-default uk-card-hover uk-card-small">
                 <div id='cardHeader' className="uk-card-header">

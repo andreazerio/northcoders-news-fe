@@ -9,7 +9,6 @@ class ArticleCommentList extends React.Component {
     }
     render() {
         const commentColumns = chunk(this.props.comments, Math.floor(this.props.comments.length / 3));
-        console.log('commentColumns',commentColumns)
         return (
             <div className="article-comment-list">
                 <nav className="level">
@@ -43,7 +42,7 @@ class ArticleCommentList extends React.Component {
 
 
     static propTypes = {
-        comments: PT.array.isRequired
+        commensa: PT.array.isRequired
     }
 }
 
