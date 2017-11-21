@@ -3,6 +3,7 @@ import PT from 'prop-types';
 import { connect } from 'react-redux';
 import NewsItem from './NewsItem';
 import { fetchArticles, fetchArticlesByTopic } from '../actions/articles';
+import { fetchComments } from '../actions/comments';
 
 class NewsList extends React.Component {
     constructor(props) {
@@ -52,6 +53,7 @@ class NewsList extends React.Component {
                         return <li style={style} key={article._id}>
                             <NewsItem
                                 article={article}
+                                fetchComments={this.props.fetchComments}
                             />
                         </li>
                     })}
@@ -84,6 +86,9 @@ const mapDispatchToProps = dispatch => {
         },
         fetchArticlesByTopic: (topic) => {
             dispatch(fetchArticlesByTopic(topic));
+        },
+        fetchComments: (article_id) => {
+            dispatch(fetchComments(article_id))
         }
     }
 }

@@ -34,7 +34,7 @@ export default (prevState = initialState, action) => {
         let newState = Object.assign({}, prevState);
         newState.loading = true;
         newState.error = null;
-        newState.data = [];
+        newState.data = prevState.data;
         return newState;
     }
     if (action.type === types.POST_COMMENT_SUCCESS) {

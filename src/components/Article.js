@@ -1,14 +1,17 @@
 import React from 'react';
 import PT from 'prop-types';
-import ArticleTitle from './ArticleTitle';
-import ArticleBody from './ArticleBody';
+import ArticleCommentForm from './ArticleCommentForm'
+import ArticleCommentList from './ArticleCommentList'
 import { connect } from 'react-redux';
 import { fetchArticles } from '../actions/articles';
-import { fetchComments } from '../actions/comments';
+import { fetchComments, postComment } from '../actions/comments';
 
 
 
 class Article extends React.Component {
+    constructor(props){
+        super(props)
+    }
 
     componentDidMount() {
         this.props.fetchArticles(this.props.match.params.id);
@@ -41,6 +44,16 @@ class Article extends React.Component {
                     <div id='footer' className="uk-card-footer">
                         <h6>{this.props.comments.length} comments   {this.props.article.votes} votes </h6>
                     </div>
+                </div>
+                <div className="comments" >
+
+                    <ArticleCommentForm 
+                    article_id={article._id}
+                    postComment={this.props.postComment}
+                    />
+                    <ArticleCommentList 
+                        comments={this.props.comments}
+                    />   
                 </div>
 
             </div>
@@ -80,6 +93,9 @@ const mapDispatchToProps = dispatch => {
         },
         fetchComments: (id) => {
             dispatch(fetchComments(id));
+        },
+        postComment: (article_id, body) => {
+            dispatch(postComment(article_id, body))
         }
     }
 }

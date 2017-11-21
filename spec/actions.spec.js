@@ -228,14 +228,15 @@ describe('async actions', () => {
                     body:'comment test',
                     created_by: 'northcoder'
                 }
+                
                 nock(API_URL)
-                .post(`/articles/${article_id}/comments`, comment)
+                .post(`/articles/${article_id}/comments`, {comment})
                 .reply(201, {comment});
           
               const expectedActions = [
                 commentsActions.postCommentRequest(article_id, comment),
                 commentsActions.postCommentSuccess(comment)
-              ];
+              ];    
           
               const store = mockStore();
               
@@ -252,7 +253,7 @@ describe('async actions', () => {
                 const error = 'article not found';
                 const invalid_article_id = 'andrea';
                 nock(API_URL)
-                  .post(`/articles/${invalid_article_id}/comments`, comment)
+                  .post(`/articles/${invalid_article_id}/comments`, {comment})
                   .replyWithError({'message': error});
                 
                 const expectedActions = [

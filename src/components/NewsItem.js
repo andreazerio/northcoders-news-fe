@@ -44,7 +44,7 @@ class NewsItem extends React.Component {
     }
 
     render() {
-        
+        console.log('real props===>',this.props)
         return (
             <div className="uk-card uk-card-default uk-card-hover uk-card-small">
                 <div id='cardHeader' className="uk-card-header">
@@ -66,7 +66,7 @@ class NewsItem extends React.Component {
 
                 <div id='footer' className="uk-card-footer">
                     <Link to={`/articles/${this.props.article._id}`}>
-                        <h6>{this.props.article.comments} comments   {this.props.article.votes} votes </h6>
+                        <h6>Comments and Votes</h6>
                     </Link>
                 </div>
             </div>
