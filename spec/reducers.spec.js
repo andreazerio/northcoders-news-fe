@@ -379,7 +379,7 @@ describe('comment reducer', () => {
     
             expect(newState.loading).to.be.false;
             expect(newState.error).to.be.null;
-            expect(newState.data).to.eql(comment);
+            expect(newState.data).to.eql(prevState.data.concat(comment));
         });
         it('does not modify the original state when handling a succesfull post comment action', () => {
             const comment = {
@@ -505,20 +505,41 @@ describe('comment reducer', () => {
             expect(newState).to.not.eql(initialState);
         });
         it('updates the state with the correct data when succesfully deleting comment', () => {
-            const comment_id = '5a0b3623eccf201ad70df0cb';
-            const action = commentsActions.deleteCommentSuccess({message: 'comment deleted'});
-            const newState = commentReducer(initialState, action);
-    
+            const comment_id = 1;
+            const dataSet =  [
+                 {_id: '1', body: 'test1', belongs_to: 'test article 1', created_by: 'test person 1'},
+                 {_id: '2', body: 'test2', belongs_to: 'test article 2', created_by: 'test person 2'},
+                 {_id: '3', body: 'test3', belongs_to: 'test article 3', created_by: 'test person 3'},
+                 {_id: '4', body: 'test4', belongs_to: 'test article 4', created_by: 'test person 4'}
+             ]
+            const state = {
+                loading: false,
+                error: null,
+                data: dataSet}
+            const action = commentsActions.deleteCommentSuccess(comment_id);
+            const newState = commentReducer(state, action);
             expect(newState.loading).to.be.false;
             expect(newState.error).to.be.null;
-            expect(newState.data.message).to.eql('comment deleted');
+            expect(newState.data).to.eql([{_id: '2', body: 'test2', belongs_to: 'test article 2', created_by: 'test person 2'},
+            {_id: '3', body: 'test3', belongs_to: 'test article 3', created_by: 'test person 3'},
+            {_id: '4', body: 'test4', belongs_to: 'test article 4', created_by: 'test person 4'}]);
         });
         it('does not modify the original state when handling a putCommentSuccess action', () => {
-            const comment_id = '5a0b3623eccf201ad70df0cb';
-            const action = commentsActions.deleteCommentSuccess({message: 'comment deleted'});
-            const newState = commentReducer(initialState, action);
+            const comment_id = 1;
+            const dataSet =  [
+                 {_id: '1', body: 'test1', belongs_to: 'test article 1', created_by: 'test person 1'},
+                 {_id: '2', body: 'test2', belongs_to: 'test article 2', created_by: 'test person 2'},
+                 {_id: '3', body: 'test3', belongs_to: 'test article 3', created_by: 'test person 3'},
+                 {_id: '4', body: 'test4', belongs_to: 'test article 4', created_by: 'test person 4'}
+             ]
+            const state = {
+                loading: false,
+                error: null,
+                data: dataSet}
+            const action = commentsActions.deleteCommentSuccess(comment_id);
+            const newState = commentReducer(state, action);
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.eql(state);
         });
         it('updates the state correctly when recieving an error message from a deleteComment action', () => {
             const error = 'error - unsuccessful request';

@@ -325,11 +325,11 @@ describe('async actions', () => {
                 const comment_id = '5a0b3623eccf201ad70df0cb';
                 nock(API_URL)
                   .delete(`/comments/${comment_id}`) 
-                  .reply(204, {});
+                  .reply(204, comment_id);
           
                 const expectedActions = [
                   commentsActions.deleteCommentRequest(comment_id),
-                  commentsActions.deleteCommentSuccess({})
+                  commentsActions.deleteCommentSuccess(comment_id)
                 ];
           
                 const store = mockStore();

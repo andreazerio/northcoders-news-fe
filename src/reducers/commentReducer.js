@@ -42,7 +42,7 @@ export default (prevState = initialState, action) => {
         const comments = action.payload;
         newState.loading = false;
         newState.error = null;
-        newState.data = comments;
+        newState.data = prevState.data.concat(comments);
         return newState;
     }
     if (action.type === types.POST_COMMENT_FAILURE) {
@@ -85,10 +85,12 @@ export default (prevState = initialState, action) => {
     }
     if (action.type === types.DELETE_COMMENT_SUCCESS) {
         let newState = Object.assign({}, prevState);
-        const comments = action.payload;
+        const commentId = action.payload;
         newState.loading = false;
         newState.error = null;
-        newState.data = comments;
+        newState.data = prevState.data.filter((comment) => {
+            return comment._id !== commentId.toString();
+          });
         return newState;
     }
     if (action.type === types.DELETE_COMMENT_FAILURE) {

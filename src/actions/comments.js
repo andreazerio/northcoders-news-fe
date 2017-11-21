@@ -48,9 +48,9 @@ export const deleteCommentRequest = comment_id => ({
     type: types.DELETE_COMMENT_REQUEST
   });
   
-  export const deleteCommentSuccess = data => ({
+  export const deleteCommentSuccess = comment_id => ({
     type: types.DELETE_COMMENT_SUCCESS,
-    payload: data
+    payload: comment_id
   });
   
   export const deleteCommentFailure = err => ({
@@ -103,8 +103,8 @@ export const deleteComment = (comment_id) => {
         const PATH = `comments/${comment_id}`;
       dispatch(deleteCommentRequest(comment_id));
       return axios.delete(`${API_URL}/${PATH}`)
-        .then((res) => {
-          dispatch(deleteCommentSuccess(res.data));
+        .then(() => {
+          dispatch(deleteCommentSuccess(comment_id));
         })
         .catch(error => {
           dispatch(deleteCommentFailure(error.message));
