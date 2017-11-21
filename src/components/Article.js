@@ -19,16 +19,23 @@ class Article extends React.Component {
         const style = {
             marginBottom: '50px'
         }
+        let article = 'loading';
+        if (this.props.article.article) article = this.props.article.article[0];
+        
+      
         return (
+            <div id= 'conditional'>
+            {article !== undefined
+            ? 
             <div className="article">
                 <div className="uk-card uk-card-default uk-card-hover uk-card-small" style={style}>
                     <div id='cardHeader' className="uk-card-header">
-                        <h3>{this.props.article.title}</h3>
-                        <p>by {this.props.article.created_by}</p>
+                        <h3>{article.title}</h3>
+                        <p>by {article.created_by}</p>
                     </div>
 
                     <div className="uk-card-body">
-                        <p>{this.props.article.body}</p>
+                        <p>{article.body}</p>
                     </div>
 
                     <div id='footer' className="uk-card-footer">
@@ -36,6 +43,11 @@ class Article extends React.Component {
                     </div>
                 </div>
 
+            </div>
+            :
+            
+            <h1>Loading article</h1>
+            }
             </div>
         )
     }
@@ -47,19 +59,17 @@ class Article extends React.Component {
         comments: PT.any.isRequired,
         commentsLoading: PT.bool.isRequired,
         commentsError: PT.any
-        //call articles/:id from redux state
-        //call articles/:id/comments from redux state
     }
 }
 
 const mapStateToProps = state => {
     return {
-        article: state.articles.aData,
-        articleLoading: state.articles.aLoading,
-        articleError: state.articles.aError,
-        comments: state.comments.cData,
-        commentsLoading: state.comments.cLoading,
-        commentsError: state.comments.cError
+        article: state.articles.data,
+        articleLoading: state.articles.loading,
+        articleError: state.articles.error,
+        comments: state.comments.data,
+        commentsLoading: state.comments.loading,
+        commentsError: state.comments.error
     }
 }
 

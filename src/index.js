@@ -5,6 +5,7 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import {Provider} from 'react-redux';
 import store from './store';
+import 'bulma/css/bulma.css';
 
 
 ReactDOM.render(

@@ -16,7 +16,6 @@ class NewsItem extends React.Component {
     handleClick(event) {
         event.preventDefault();
         let key = Object.keys(event.target)[0]
-        // this.showNextCharacter(event.target[key].memoizedProps.val)
         if (!this.state.toggle) {
             this.setState({
                 slice: event.target[key].memoizedProps.val,
