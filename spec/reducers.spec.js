@@ -523,7 +523,7 @@ describe('comment reducer', () => {
     
             expect(newState.loading).to.be.true;
             expect(newState.error).to.be.null;
-            expect(newState.data).to.eql([]);
+            expect(newState.data).to.eql(initialState.data);
         });
         it('does not modify the original state when handling a putCommentRequest action', () => {
             const comment_id = '5a0b3623eccf201ad70df0cb';

@@ -1,29 +1,37 @@
 import React from 'react';
 import PT from 'prop-types';
 
-class VotingIcons extends React.Component {
+class ActionIcons extends React.Component {
     constructor (props) {
         super (props);
 
         this.handleClickUp = this.handleClickUp.bind(this);
         this.handleClickDown = this.handleClickDown.bind(this);
+       this.handleClickDelete = this.handleClickDelete.bind(this);
     }
     handleClickUp (e) {
         e.preventDefault();
-        if (this.props.putArticle) this.props.articleVoteUp()
+        if (this.props.putArticle) this.props.articleVoteUp();
+        if (this.props.putComment) this.props.voteCommentUp();
     }
 
     handleClickDown (e) {
         e.preventDefault();
-        if (this.props.putArticle) this.props.articleVoteDown()
+        if (this.props.putArticle) this.props.articleVoteDown();
+        if (this.props.putComment) this.props.voteCommentDown();
     }
+
+   handleClickDelete(e) {
+    e.preventDefault();
+    this.props.deleteSingleComment();
+   }
 
     render() {
         const style ={
             margin: '10px'
         }
         return (
-            <div className="icons">
+            <div className="icons" style={{display:'flex'}}>
                 <button
                     className="button"
                     value="up"
@@ -40,6 +48,7 @@ class VotingIcons extends React.Component {
                 >
                     <span uk-icon="icon: minus"></span>
                 </button>
+                {this.props.created_by === 'northcoder' ? <button style={style} className='button' onClick={this.handleClickDelete}><span uk-icon="icon: close" ></span></button> :<div></div>}
             </div>
         );
     }
@@ -52,4 +61,4 @@ class VotingIcons extends React.Component {
 }
 
 
-export default VotingIcons;
+export default ActionIcons;

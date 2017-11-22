@@ -7,7 +7,9 @@ class ArticleCommentList extends React.Component {
     constructor(props){
         super(props)
     }
+
     render() {
+        console.log('Comment list props===>',this.props.comments)
         const commentColumns = chunk(this.props.comments, Math.floor(this.props.comments.length / 3));
         return (
             <div className="article-comment-list">
@@ -30,6 +32,10 @@ class ArticleCommentList extends React.Component {
                                 return <div className={cardClass} key={comment._id}>
                                     <Comment
                                         comment={comment}
+                                        putComment={this.props.putComment}
+                                        fetchComments={this.props.fetchComments}
+                                        article_id={this.props.article_id}
+                                        deleteComment={this.props.deleteComment}
                                     />
                                 </div>
                             })}
@@ -42,7 +48,7 @@ class ArticleCommentList extends React.Component {
 
 
     static propTypes = {
-        commensa: PT.array.isRequired
+        comments: PT.array.isRequired
     }
 }
 

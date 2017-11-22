@@ -2,10 +2,10 @@ import React from 'react';
 import PT from 'prop-types';
 import ArticleCommentForm from './ArticleCommentForm';
 import ArticleCommentList from './ArticleCommentList';
-import VotingIcons from './VotingIcons';
+import ActionIcons from './ActionIcons';
 import { connect } from 'react-redux';
 import { fetchArticles, putArticle } from '../actions/articles';
-import { fetchComments, postComment, putComment } from '../actions/comments';
+import { fetchComments, postComment, putComment, deleteComment } from '../actions/comments';
 
 
 
@@ -36,7 +36,6 @@ class Article extends React.Component {
         }
         let article = 'loading';
         if (this.props.article.article) article = this.props.article.article[0];
-        console.log('relevant props----->',this.props)
         
         return (
             <div id= 'conditional'>
@@ -55,7 +54,7 @@ class Article extends React.Component {
 
                     <div id='footer' className="uk-card-footer">
                         <h6>{this.props.comments.length} comments   {article.votes} votes </h6>
-                        <VotingIcons 
+                        <ActionIcons 
                         votes={article.votes}
                         articleVoteUp={this.articleVoteUp}
                         articleVoteDown={this.articleVoteDown}
@@ -72,6 +71,9 @@ class Article extends React.Component {
                     <ArticleCommentList 
                         comments={this.props.comments}
                         putComment={this.props.putComment}
+                        fetchComments={this.props.fetchComments}
+                        article_id={article._id}
+                        deleteComment={this.props.deleteComment}
                     />   
                 </div>
 
@@ -92,7 +94,7 @@ class Article extends React.Component {
 
                 <div id='footer' className="uk-card-footer">
                     <h6>{this.props.comments.length} comments   {this.props.article.article.votes} votes </h6>
-                    <VotingIcons 
+                    <ActionIcons 
                     votes={this.props.article.article.votes}
                     articleVoteUp={this.articleVoteUp}
                     articleVoteDown={this.articleVoteDown}
@@ -109,6 +111,9 @@ class Article extends React.Component {
                 <ArticleCommentList 
                     comments={this.props.comments}
                     putComment={this.props.putComment}
+                    fetchComments={this.props.fetchComments}
+                    article_id={this.props.article.article._id}
+                    deleteComment={this.props.deleteComment}
                 />   
             </div>
 
@@ -144,8 +149,8 @@ const mapDispatchToProps = dispatch => {
         fetchArticles: (article_id) => {
             dispatch(fetchArticles(article_id));
         },
-        fetchComments: (comment_id) => {
-            dispatch(fetchComments(comment_id));
+        fetchComments: (article_id) => {
+            dispatch(fetchComments(article_id));
         },
         postComment: (article_id, body) => {
             dispatch(postComment(article_id, body))
@@ -155,6 +160,9 @@ const mapDispatchToProps = dispatch => {
         },
         putComment: (comment_id, vote) => {
             dispatch(putComment(comment_id, vote))
+        },
+        deleteComment: (comment_id) => {
+            dispatch(deleteComment(comment_id))
         }
     }
 }
