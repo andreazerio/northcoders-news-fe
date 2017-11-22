@@ -27,7 +27,7 @@ class ArticleCommentList extends React.Component {
                             {commentColumn.map(comment => {
                                 const cardClass = i % 2 === 0 ?
                                     "uk-card uk-card-default uk-card-default uk-grid-margin uk-card-hover" :
-                                    "uk-card uk-card-default uk-card-primary uk-grid-margin uk-card-hover";
+                                    "uk-card uk-card-default uk-card-secondary uk-grid-margin uk-card-hover";
                                 return <div className={cardClass} key={comment._id}>
                                     <Comment
                                         comment={comment}

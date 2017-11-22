@@ -51,7 +51,7 @@ class NavBar extends React.Component {
                             </ul>
                         </div>
                     </div>
-                    <h1 style={{fontSize: '300%', marginLeft: '14.9%', color: 'white'}}className="uk-align-center">Northcoders <img src='https://cdn-images-1.medium.com/max/184/1*LdnSztHVYhhd8K8EqlgCJQ@2x.png' height='100' width='100' style={{marginLeft:'270px', marginRight: '340px'}}/> News</h1>
+                    <h1 style={{fontSize: '230%', marginLeft: '10%', color: 'white'}}className="uk-align-center">Northcoders <img src='https://cdn-images-1.medium.com/max/184/1*LdnSztHVYhhd8K8EqlgCJQ@2x.png' height='60' width='100' style={{marginLeft:'170px', marginRight: '240px'}}/> News</h1>
                 </nav>
             </div>
         )
