@@ -57,7 +57,7 @@ export default (prevState = initialState, action) => {
         let newState = Object.assign({}, prevState);
         newState.loading = true;
         newState.error = null;
-        newState.data = [];
+        newState.data = prevState.data;
         return newState;
     }
     if (action.type === types.PUT_COMMENT_SUCCESS) {
@@ -65,7 +65,10 @@ export default (prevState = initialState, action) => {
         const comments = action.payload;
         newState.loading = false;
         newState.error = null;
-        newState.data = comments;
+        newState.data = prevState.data.map(comment => {
+            if (comment._id === comments._id ) comment = comments;
+            return comment
+        });
         return newState;
     }
     if (action.type === types.PUT_COMMENT_FAILURE) {

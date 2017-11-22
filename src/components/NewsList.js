@@ -49,7 +49,7 @@ class NewsList extends React.Component {
             <div >
                 <h3 >{this.props.loading ? "Loading " : ""}{order === '/' ? "Latest" : "Popular"} News Stories</h3>
                 <ul className="uk-list">
-                    {Array.isArray(articles) && articles.slice(0, 10).map(article => {
+                    {Array.isArray(articles) && articles.slice(0, 10).map((article, item) => {
                         return <li style={style} key={article._id}>
                             <NewsItem
                                 article={article}

@@ -11,7 +11,7 @@ class NavBar extends React.Component {
         }
         return (
             <div>
-                <nav className="uk-navbar uk-navbar-container uk-margin">
+                <nav className="uk-navbar uk-navbar-container uk-margin" >
                     <button className="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-push">Menu</button>
                     <div id="offcanvas-push" uk-offcanvas="mode: reveal; overlay: true">
                         <div className="uk-offcanvas-bar">

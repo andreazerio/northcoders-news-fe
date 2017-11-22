@@ -9,7 +9,6 @@ class ArticleCommentList extends React.Component {
     }
 
     render() {
-        console.log('Comment list props===>',this.props.comments)
         const commentColumns = chunk(this.props.comments, Math.floor(this.props.comments.length / 3));
         return (
             <div className="article-comment-list">

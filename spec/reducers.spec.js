@@ -473,17 +473,28 @@ describe('comment reducer', () => {
         });
         it('updates the state with the correct data when succesfully voting on a comment', () => {
             const comment_id = '5a0b3623eccf201ad70df0cb';
-            const comment = {
-                id: comment_id,
-                votes: 1
-            }
+            const dataSet = [
+                {_id: comment_id, votes: 5},
+                {_id: 'test1', votes: 4}
+            ]
+
+            const comment = {_id: comment_id, votes: 4}
             const vote = 'down';
+            const state = {
+                loading: false,
+                error: null,
+                data: dataSet
+            } 
+            
             const action = commentsActions.putCommentSuccess(comment);
-            const newState = commentReducer(initialState, action);
+            const newState = commentReducer(state, action);
     
             expect(newState.loading).to.be.false;
             expect(newState.error).to.be.null;
-            expect(newState.data).to.eql(comment);
+            expect(newState.data).to.eql([
+                {_id: comment_id, votes: 4},
+                {_id: 'test1', votes: 4}
+            ]);
         });
         it('does not modify the original state when handling a putCommentSuccess action', () => {
             const comment_id = '5a0b3623eccf201ad70df0cb';

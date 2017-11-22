@@ -5,6 +5,9 @@ import ActionIcons from './ActionIcons'
 class Comment extends React.Component {
     constructor(props){
         super(props)
+        this.state= {
+            timesVoted: 0
+        }
 
         this.voteCommentUp = this.voteCommentUp.bind(this);
         this.voteCommentDown = this.voteCommentDown.bind(this);
@@ -12,17 +15,29 @@ class Comment extends React.Component {
     }
     voteCommentUp() {
         this.props.putComment(this.props.comment._id, 'up');
+       let numberOfVotes = this.state.timesVoted + 1 
+        this.setState({
+            timesVoted: numberOfVotes
+        });
     }
 
     voteCommentDown() {
         this.props.putComment(this.props.comment._id, 'down');
+        let numberOfVotes = this.state.timesVoted + 1 
+        this.setState({
+            timesVoted: numberOfVotes
+        });
     }
 
     deleteSingleComment() {
         this.props.deleteComment(this.props.comment._id)
     }
+
+    componentDidMount() {
+        this.voteCommentUp();
+        this.voteCommentDown();
+    }
     render () {
-        // console.log('comment props==>',this.props)
         return (
             <div> 
                    
