@@ -41,10 +41,10 @@ class Article extends React.Component {
             <div id= 'conditional'>
             {article !== undefined
             ? 
-            <div className="article">
+            <div className="article" style={{paddingTop:'12%'}}>
                 <div className="uk-card uk-card-default uk-card-hover uk-card-small" style={style}>
                     <div id='cardHeader' className="uk-card-header">
-                        <h3>{article.title}</h3>
+                        <h3 style={{fontSize: '150%'}}>{article.title}</h3>
                         <p>by {article.created_by}</p>
                     </div>
 
@@ -80,7 +80,7 @@ class Article extends React.Component {
             </div>
             :
             
-            <div className="article">
+            <div className="article" style={{paddingTop:'12%'}}>
             {console.log('modified props',this.props)}
             <div className="uk-card uk-card-default uk-card-hover uk-card-small" style={style}>
                 <div id='cardHeader' className="uk-card-header">

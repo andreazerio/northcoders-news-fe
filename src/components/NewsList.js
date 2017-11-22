@@ -38,7 +38,7 @@ class NewsList extends React.Component {
 
     render() {
         const style = {
-            margin: '10px'
+            margin: '20px'
         }
         let { articles } = this.props;
         const order = this.props.match.url;
@@ -46,10 +46,10 @@ class NewsList extends React.Component {
             articles = articles.sort((a, b) => b.votes - a.votes);
         }
         return (
-            <div >
-                <h3 >{this.props.loading ? "Loading " : ""}{order === '/' ? "Latest" : "Popular"} News Stories</h3>
+            <div style={{paddingTop: '10%'}}>
+                <h3 style={{fontSize: '180%'}} >{this.props.loading ? "Loading " : ""}{order === '/' ? "Latest" : "Popular"} News Stories</h3>
                 <ul className="uk-list">
-                    {Array.isArray(articles) && articles.slice(0, 10).map((article, item) => {
+                    {Array.isArray(articles) && articles.slice(0, 10).map((article, index) => {
                         return <li style={style} key={article._id}>
                             <NewsItem
                                 article={article}

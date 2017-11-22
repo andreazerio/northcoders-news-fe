@@ -8,9 +8,9 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-      <section className='section'>
+      <section className='section' style={{padding: '0'}}>
       <div className="App">
-      <NavBar />
+      <NavBar style={{position:'fixed', marginTop:'0px'}}/>
       <Switch>
         <Route 
                 exact path="/"
