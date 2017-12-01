@@ -37,7 +37,7 @@ describe('article reducer', () => {
             const action = articleActions.fetchArticlesRequest();
             const newState = articleReducer(initialState, action);
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.equal(initialState);
         });
         it('updates the state with the correct data when succesfully receiving articles', () => {
             const data = ['article1', 'article2', 'article3'];
@@ -55,7 +55,7 @@ describe('article reducer', () => {
             const action = articleActions.fetchArticlesSuccess(data);
             const newState = articleReducer(prevState, action);
     
-            expect(newState).to.not.eql(prevState);
+            expect(newState).to.not.equal(prevState);
         });
         it('updates the state correctly when recieving an error message', () => {
             const error = 'error - unsuccessful request';
@@ -73,7 +73,7 @@ describe('article reducer', () => {
             const action = articleActions.fetchArticlesFailure(error);
             const newState = articleReducer(prevState, action);
     
-            expect(newState).to.not.eql(prevState);
+            expect(newState).to.not.equal(prevState);
         });
     });
 
@@ -93,7 +93,7 @@ describe('article reducer', () => {
             const action = articleActions.fetchArticlesRequest(article_id);
             const newState = articleReducer(initialState, action);
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.equal(initialState);
         });
         it('updates the state with the correct data when succesfully receiving one specific article', () => {
             const article = 'article1';
@@ -113,7 +113,7 @@ describe('article reducer', () => {
             const action = articleActions.fetchArticlesSuccess(article);
             const newState = articleReducer(initialState, action);
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.equal(initialState);
         });
         it('updates the state correctly when recieving an error message from a fetch by article_id action', () => {
             const error = 'error - unsuccessful request';
@@ -133,7 +133,7 @@ describe('article reducer', () => {
             const action = articleActions.fetchArticlesFailure(error);
             const newState = articleReducer(prevState, action);
     
-            expect(newState).to.not.eql(prevState);
+            expect(newState).to.not.equal(prevState);
         });
     });
     
@@ -152,7 +152,7 @@ describe('article reducer', () => {
             const action = articleActions.fetchArticlesRequest(topic_id);
             const newState = articleReducer(initialState, action);
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.equal(initialState);
         });
         it('updates the state with the correct data when succesfully receiving articles by topic', () => {
             const article = ['article1', 'article2', 'article3'];
@@ -172,7 +172,7 @@ describe('article reducer', () => {
             const action = articleActions.fetchArticlesSuccess(article);
             const newState = articleReducer(prevState, action);
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.equal(initialState);
         });
         it('updates the state correctly when recieving an error message from a fetch by article_id action', () => {
             const error = 'error - unsuccessful request';
@@ -192,7 +192,7 @@ describe('article reducer', () => {
             const action = articleActions.fetchArticlesFailure(error);
             const newState = articleReducer(prevState, action);
     
-            expect(newState).to.not.eql(prevState);
+            expect(newState).to.not.equal(prevState);
         });
     });
 
@@ -213,7 +213,7 @@ describe('article reducer', () => {
             const action = articleActions.putArticleRequest(article_id, vote);
             const newState = articleReducer(initialState, action);
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.equal(initialState);
         });
         it('updates the state with the correct data when succesfully voting on an article', () => {
             const vote = 'up';
@@ -241,7 +241,7 @@ describe('article reducer', () => {
             const action = articleActions.putArticleSuccess(article);
             const newState = articleReducer(prevState, action);
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.equal(initialState);
         });
         it('updates the state correctly when recieving an error message from a putArticle action', () => {
             const error = 'error - unsuccessful request';
@@ -261,7 +261,7 @@ describe('article reducer', () => {
             const action = articleActions.putArticleFailure(error);
             const newState = articleReducer(prevState, action);
     
-            expect(newState).to.not.eql(prevState);
+            expect(newState).to.not.equal(prevState);
         });
     });
 });
@@ -298,7 +298,7 @@ describe('comment reducer', () => {
             const action = commentsActions.fetchCommentsRequest(article_id);
             const newState = commentReducer(initialState, action);
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.equal(initialState);
         });
         it('updates the state with the correct data when succesfully receiving comments for a particular article', () => {
             const comments = ['comments1', 'comments2', 'comments3'];
@@ -318,7 +318,7 @@ describe('comment reducer', () => {
             const action = commentsActions.fetchCommentsSuccess(comments);
             const newState = commentReducer(prevState, action);
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.equal(initialState);
         });
         it('updates the state correctly when recieving an error message from a fetch comments action', () => {
             const error = 'error - unsuccessful request';
@@ -338,7 +338,7 @@ describe('comment reducer', () => {
             const action = commentsActions.fetchCommentsFailure(error);
             const newState = commentReducer(prevState, action);
     
-            expect(newState).to.not.eql(prevState);
+            expect(newState).to.not.equal(prevState);
         });
     });
 
@@ -365,7 +365,7 @@ describe('comment reducer', () => {
             const action = commentsActions.postCommentRequest(article_id, comment);
             const newState = commentReducer(initialState, action);
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.equal(initialState);
         });
         it('updates the state with the correct data when succesfully posting a comment', () => {
             const comment = {
@@ -420,7 +420,7 @@ describe('comment reducer', () => {
             const newState = commentReducer(state, action);
     
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.equal(initialState);
         });
         it('updates the state correctly when recieving an error message from a post comments action', () => {
             const comment = {
@@ -448,7 +448,7 @@ describe('comment reducer', () => {
             const action = commentsActions.postCommentFailure(error);
             const newState = commentReducer(prevState, action);
     
-            expect(newState).to.not.eql(prevState);
+            expect(newState).to.not.equal(prevState);
         });
     });
 
@@ -469,7 +469,7 @@ describe('comment reducer', () => {
             const action = commentsActions.putCommentRequest(comment_id, vote);
             const newState = commentReducer(initialState, action);
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.equal(initialState);
         });
         it('updates the state with the correct data when succesfully voting on a comment', () => {
             const comment_id = '5a0b3623eccf201ad70df0cb';
@@ -502,7 +502,7 @@ describe('comment reducer', () => {
             const action = commentsActions.putCommentRequest(comment_id, vote);
             const newState = commentReducer(initialState, action);
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.equal(initialState);
         });
         it('updates the state correctly when recieving an error message from a putComment action', () => {
             const error = 'error - unsuccessful request';
@@ -522,7 +522,7 @@ describe('comment reducer', () => {
             const action = commentsActions.putCommentFailure(error);
             const newState = commentReducer(prevState, action);
     
-            expect(newState).to.not.eql(prevState);
+            expect(newState).to.not.equal(prevState);
         });
     });
 
@@ -541,7 +541,7 @@ describe('comment reducer', () => {
             const action = commentsActions.deleteCommentRequest(comment_id);
             const newState = commentReducer(initialState, action);
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.equal(initialState);
         });
         it('updates the state with the correct data when succesfully deleting comment', () => {
             const comment_id = 1;
@@ -578,7 +578,7 @@ describe('comment reducer', () => {
             const action = commentsActions.deleteCommentSuccess(comment_id);
             const newState = commentReducer(state, action);
     
-            expect(newState).to.not.eql(state);
+            expect(newState).to.not.equal(state);
         });
         it('updates the state correctly when recieving an error message from a deleteComment action', () => {
             const error = 'error - unsuccessful request';
@@ -598,7 +598,7 @@ describe('comment reducer', () => {
             const action = commentsActions.deleteCommentFailure(error);
             const newState = commentReducer(prevState, action);
     
-            expect(newState).to.not.eql(prevState);
+            expect(newState).to.not.equal(prevState);
         });
     });
 });
@@ -620,7 +620,7 @@ describe('topic reducer', () => {
             const action = topicsActions.fetchTopicsRequest();
             const newState = topicReducer(initialState, action);
     
-            expect(newState).to.not.eql(initialState);
+            expect(newState).to.not.equal(initialState);
         });
         it('updates the state with the correct data when succesfully receiving topics', () => {
             const data = ['topic1', 'topic2', 'topic3'];
@@ -638,7 +638,7 @@ describe('topic reducer', () => {
             const action = topicsActions.fetchTopicsSuccess(data);
             const newState = topicReducer(prevState, action);
     
-            expect(newState).to.not.eql(prevState);
+            expect(newState).to.not.equal(prevState);
         });
         it('updates the state correctly when recieving an error message', () => {
             const error = 'error - unsuccessful request';
@@ -656,7 +656,7 @@ describe('topic reducer', () => {
             const action = topicsActions.fetchTopicsFailure(error);
             const newState = topicReducer(prevState, action);
     
-            expect(newState).to.not.eql(prevState);
+            expect(newState).to.not.equal(prevState);
         });
     });
 
