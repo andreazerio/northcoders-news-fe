@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import store from './store';
 import 'bulma/css/bulma.css';
 
 
 ReactDOM.render(
-<Provider store={store}>
+  <Provider store={store}>
     <App />
   </Provider>, document.getElementById('root'));
 registerServiceWorker();

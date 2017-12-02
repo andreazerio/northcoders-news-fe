@@ -66,7 +66,7 @@ export default (prevState = initialState, action) => {
         newState.loading = false;
         newState.error = null;
         newState.data = prevState.data.map(comment => {
-            if (comment._id === comments._id ) comment = comments;
+            if (comment._id === comments._id) comment = comments;
             return comment
         });
         return newState;
@@ -93,7 +93,7 @@ export default (prevState = initialState, action) => {
         newState.error = null;
         newState.data = prevState.data.filter((comment) => {
             return comment._id !== commentId.toString();
-          });
+        });
         return newState;
     }
     if (action.type === types.DELETE_COMMENT_FAILURE) {

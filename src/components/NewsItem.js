@@ -53,8 +53,8 @@ class NewsItem extends React.Component {
 
                 <div className="uk-card-body">
                     <p>{this.props.article.body.slice(0, this.state.slice)}</p>
-                    
-                    {this.props.article.body.length > 300 && <button 
+
+                    {this.props.article.body.length > 300 && <button
                         className="uk-button uk-button-text"
                         val={this.props.article.body.length}
                         onClick={this.handleClick}

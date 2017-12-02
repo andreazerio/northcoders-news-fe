@@ -10,7 +10,7 @@ import { fetchComments, postComment, putComment, deleteComment } from '../action
 
 
 class Article extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
 
         this.articleVoteUp = this.articleVoteUp.bind(this);
@@ -36,89 +36,89 @@ class Article extends React.Component {
         }
         let article = 'loading';
         if (this.props.article.article) article = this.props.article.article[0];
-        
+
         return (
-            <div id= 'conditional'>
-            {article !== undefined
-            ? 
-            <div className="article" style={{paddingTop:'12%'}}>
-                <div className="uk-card uk-card-default uk-card-hover uk-card-small" style={style}>
-                    <div id='cardHeader' className="uk-card-header">
-                        <h3 style={{fontSize: '150%'}}>{article.title}</h3>
-                        <p>by {article.created_by}</p>
+            <div id='conditional'>
+                {article !== undefined
+                    ?
+                    <div className="article" style={{ paddingTop: '12%' }}>
+                        <div className="uk-card uk-card-default uk-card-hover uk-card-small" style={style}>
+                            <div id='cardHeader' className="uk-card-header">
+                                <h3 style={{ fontSize: '150%' }}>{article.title}</h3>
+                                <p>by {article.created_by}</p>
+                            </div>
+
+                            <div className="uk-card-body">
+                                <p>{article.body}</p>
+                            </div>
+
+                            <div id='footer' className="uk-card-footer">
+                                <h6>{this.props.comments.length} comments   {article.votes} votes </h6>
+                                <ActionIcons
+                                    votes={article.votes}
+                                    articleVoteUp={this.articleVoteUp}
+                                    articleVoteDown={this.articleVoteDown}
+                                    putArticle={this.props.putArticle}
+                                />
+                            </div>
+                        </div>
+                        <div className="comments" >
+
+                            <ArticleCommentForm
+                                article_id={article._id}
+                                postComment={this.props.postComment}
+                            />
+                            <ArticleCommentList
+                                comments={this.props.comments}
+                                putComment={this.props.putComment}
+                                fetchComments={this.props.fetchComments}
+                                article_id={article._id}
+                                deleteComment={this.props.deleteComment}
+                            />
+                        </div>
+
                     </div>
+                    :
 
-                    <div className="uk-card-body">
-                        <p>{article.body}</p>
+                    <div className="article" style={{ paddingTop: '12%' }}>
+                        {console.log('modified props', this.props)}
+                        <div className="uk-card uk-card-default uk-card-hover uk-card-small" style={style}>
+                            <div id='cardHeader' className="uk-card-header">
+                                <h3>{this.props.article.article.title}</h3>
+                                <p>by {this.props.article.article.created_by}</p>
+                            </div>
+
+                            <div className="uk-card-body">
+                                <p>{this.props.article.article.body}</p>
+                            </div>
+
+                            <div id='footer' className="uk-card-footer">
+                                <h6>{this.props.comments.length} comments   {this.props.article.article.votes} votes </h6>
+                                <ActionIcons
+                                    votes={this.props.article.article.votes}
+                                    articleVoteUp={this.articleVoteUp}
+                                    articleVoteDown={this.articleVoteDown}
+                                    putArticle={this.props.putArticle}
+                                />
+                            </div>
+                        </div>
+                        <div className="comments" >
+
+                            <ArticleCommentForm
+                                article_id={this.props.article.article._id}
+                                postComment={this.props.postComment}
+                            />
+                            <ArticleCommentList
+                                comments={this.props.comments}
+                                putComment={this.props.putComment}
+                                fetchComments={this.props.fetchComments}
+                                article_id={this.props.article.article._id}
+                                deleteComment={this.props.deleteComment}
+                            />
+                        </div>
+
                     </div>
-
-                    <div id='footer' className="uk-card-footer">
-                        <h6>{this.props.comments.length} comments   {article.votes} votes </h6>
-                        <ActionIcons 
-                        votes={article.votes}
-                        articleVoteUp={this.articleVoteUp}
-                        articleVoteDown={this.articleVoteDown}
-                        putArticle={this.props.putArticle}
-                        />
-                    </div>
-                </div>
-                <div className="comments" >
-
-                    <ArticleCommentForm 
-                    article_id={article._id}
-                    postComment={this.props.postComment}
-                    />
-                    <ArticleCommentList 
-                        comments={this.props.comments}
-                        putComment={this.props.putComment}
-                        fetchComments={this.props.fetchComments}
-                        article_id={article._id}
-                        deleteComment={this.props.deleteComment}
-                    />   
-                </div>
-
-            </div>
-            :
-            
-            <div className="article" style={{paddingTop:'12%'}}>
-            {console.log('modified props',this.props)}
-            <div className="uk-card uk-card-default uk-card-hover uk-card-small" style={style}>
-                <div id='cardHeader' className="uk-card-header">
-                    <h3>{this.props.article.article.title}</h3>
-                    <p>by {this.props.article.article.created_by}</p>
-                </div>
-
-                <div className="uk-card-body">
-                    <p>{this.props.article.article.body}</p>
-                </div>
-
-                <div id='footer' className="uk-card-footer">
-                    <h6>{this.props.comments.length} comments   {this.props.article.article.votes} votes </h6>
-                    <ActionIcons 
-                    votes={this.props.article.article.votes}
-                    articleVoteUp={this.articleVoteUp}
-                    articleVoteDown={this.articleVoteDown}
-                    putArticle={this.props.putArticle}
-                    />
-                </div>
-            </div>
-            <div className="comments" >
-
-                <ArticleCommentForm 
-                article_id={this.props.article.article._id}
-                postComment={this.props.postComment}
-                />
-                <ArticleCommentList 
-                    comments={this.props.comments}
-                    putComment={this.props.putComment}
-                    fetchComments={this.props.fetchComments}
-                    article_id={this.props.article.article._id}
-                    deleteComment={this.props.deleteComment}
-                />   
-            </div>
-
-        </div>
-            }
+                }
             </div>
         )
     }

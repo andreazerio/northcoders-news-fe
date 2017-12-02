@@ -9,7 +9,7 @@ class NewsList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            articles : []
+            articles: []
         }
         this.sourceArticles = this.sourceArticles.bind(this)
     }
@@ -46,8 +46,8 @@ class NewsList extends React.Component {
             articles = articles.sort((a, b) => b.votes - a.votes);
         }
         return (
-            <div style={{paddingTop: '15%'}}>
-                <h3 style={{fontSize: '180%'}} >{this.props.loading ? "Loading " : ""}{order === '/' ? "Latest" : "Popular"} News Stories</h3>
+            <div style={{ paddingTop: '15%' }}>
+                <h3 style={{ fontSize: '180%' }} >{this.props.loading ? "Loading " : ""}{order === '/' ? "Latest" : "Popular"} News Stories</h3>
                 <ul className="uk-list">
                     {Array.isArray(articles) && articles.slice(0, 10).map((article, index) => {
                         return <li style={style} key={article._id}>

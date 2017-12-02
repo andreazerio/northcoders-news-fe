@@ -11,7 +11,7 @@ class NavBar extends React.Component {
         }
         return (
             <div>
-                <nav className="uk-navbar uk-navbar-container uk-margin" style={{backgroundColor:'rgba(0,0,0,0.8)', position: 'fixed', zIndex: '5', width: '100%', marginTop:'0px'}}>
+                <nav className="uk-navbar uk-navbar-container uk-margin" style={{ backgroundColor: 'rgba(0,0,0,0.8)', position: 'fixed', zIndex: '5', width: '100%', marginTop: '0px' }}>
                     <button className="uk-button uk-button-secondary uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-push"><span uk-icon="icon: menu" ></span></button>
                     <div id="offcanvas-push" uk-offcanvas="mode: reveal; overlay: true">
                         <div className="uk-offcanvas-bar">
@@ -51,7 +51,7 @@ class NavBar extends React.Component {
                             </ul>
                         </div>
                     </div>
-                    <h1 style={{fontSize: '230%', marginLeft: '10%', color: 'white'}}className="uk-align-center">Northcoders <img src='https://cdn-images-1.medium.com/max/184/1*LdnSztHVYhhd8K8EqlgCJQ@2x.png' height='60' width='100' style={{marginLeft:'170px', marginRight: '240px'}}/> News</h1>
+                    <h1 style={{ fontSize: '230%', marginLeft: '10%', color: 'white' }} className="uk-align-center">Northcoders <img src='https://cdn-images-1.medium.com/max/184/1*LdnSztHVYhhd8K8EqlgCJQ@2x.png' height='60' width='100' style={{ marginLeft: '170px', marginRight: '240px' }} /> News</h1>
                 </nav>
             </div>
         )

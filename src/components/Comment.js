@@ -3,9 +3,9 @@ import PT from 'prop-types';
 import ActionIcons from './ActionIcons'
 
 class Comment extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
-        this.state= {
+        this.state = {
             timesVoted: 0
         }
 
@@ -15,7 +15,7 @@ class Comment extends React.Component {
     }
     voteCommentUp() {
         this.props.putComment(this.props.comment._id, 'up');
-       let numberOfVotes = this.state.timesVoted + 1 
+        let numberOfVotes = this.state.timesVoted + 1
         this.setState({
             timesVoted: numberOfVotes
         });
@@ -23,7 +23,7 @@ class Comment extends React.Component {
 
     voteCommentDown() {
         this.props.putComment(this.props.comment._id, 'down');
-        let numberOfVotes = this.state.timesVoted + 1 
+        let numberOfVotes = this.state.timesVoted + 1
         this.setState({
             timesVoted: numberOfVotes
         });
@@ -37,30 +37,30 @@ class Comment extends React.Component {
         this.voteCommentUp();
         this.voteCommentDown();
     }
-    render () {
+    render() {
         return (
-            <div> 
-                   
-               <strong><h6>{this.props.comment.created_by}</h6></strong> 
+            <div>
+
+                <strong><h6>{this.props.comment.created_by}</h6></strong>
                 <p>
                     {this.props.comment.body}
                 </p>
                 <strong>{this.props.comment.votes} Votes</strong>
-                <div className ='icons' style={{display: 'inline'}}>
-                <ActionIcons
-                voteCommentUp={this.voteCommentUp}
-                voteCommentDown={this.voteCommentDown}
-                putComment={this.props.putComment}
-                created_by = {this.props.comment.created_by}
-                deleteSingleComment={this.deleteSingleComment}
-                />
+                <div className='icons' style={{ display: 'inline' }}>
+                    <ActionIcons
+                        voteCommentUp={this.voteCommentUp}
+                        voteCommentDown={this.voteCommentDown}
+                        putComment={this.props.putComment}
+                        created_by={this.props.comment.created_by}
+                        deleteSingleComment={this.deleteSingleComment}
+                    />
                 </div>
             </div>
         );
     }
 
     static propTypes = {
-        comment : PT.object.isRequired
+        comment: PT.object.isRequired
     }
 }
 

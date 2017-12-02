@@ -8,29 +8,29 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-      <section className='section' style={{padding: '0'}}>
-      <div className="App">
-      <NavBar style={{position:'fixed', marginTop:'0px'}}/>
-      <Switch>
-        <Route 
+        <section className='section' style={{ padding: '0' }}>
+          <div className="App">
+            <NavBar style={{ position: 'fixed', marginTop: '0px' }} />
+            <Switch>
+              <Route
                 exact path="/"
                 component={NewsList}
-        />
-        <Route
+              />
+              <Route
                 exact path="/popular"
                 component={NewsList}
               />
-        <Route
+              <Route
                 exact path="/topics/:topic"
                 component={NewsList}
               />
-        <Route
+              <Route
                 exact path='/articles/:id'
                 component={Article}
               />
-      </Switch>
-      </div>
-      </section>
+            </Switch>
+          </div>
+        </section>
       </BrowserRouter>
     );
   }

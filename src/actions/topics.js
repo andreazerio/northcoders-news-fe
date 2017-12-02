@@ -1,6 +1,6 @@
 import * as types from '../types/index';
 import axios from 'axios';
-import {API_URL} from '../config'
+import { API_URL } from '../config'
 
 export const fetchTopicsRequest = () => ({
     type: types.FETCH_TOPICS_REQUEST
@@ -21,9 +21,9 @@ export const fetchTopics = () => {
         const PATH = 'topics';
         dispatch(fetchTopicsRequest());
         return axios.get(`${API_URL}/${PATH}`)
-        .then(res => {
+            .then(res => {
                 dispatch(fetchTopicsSuccess(res.data.topics))
-        })
-        .catch(error => dispatch(fetchTopicsFailure(error.message)))
+            })
+            .catch(error => dispatch(fetchTopicsFailure(error.message)))
     };
 };

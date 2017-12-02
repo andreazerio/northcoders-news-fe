@@ -4,7 +4,7 @@ import Comment from './Comment';
 import chunk from 'lodash/chunk';
 
 class ArticleCommentList extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
     }
 

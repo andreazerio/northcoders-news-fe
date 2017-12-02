@@ -46,6 +46,12 @@ To run the application locally open a terminal window and navigate to the projec
 
 The application will run on http://localhost:3000
 
+## Testing 
+
+To test the api open a terminal window, navigate to the project directory and enter the following command:
+
+```npm test```
+
 ## Built With
 1. React
 2. Redux

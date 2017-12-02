@@ -1,15 +1,15 @@
 import React from 'react';
 
 class ArticleCommentForm extends React.Component {
-    constructor (props) {
-        super (props);
-        
+    constructor(props) {
+        super(props);
+
         this.state = {
-            commentBody : ''
+            commentBody: ''
         }
 
         this.handleClick = this.handleClick.bind(this);
-        this.handleChange = this.handleChange.bind(this);           
+        this.handleChange = this.handleChange.bind(this);
     }
 
     render() {
@@ -17,7 +17,7 @@ class ArticleCommentForm extends React.Component {
             <div className="field">
                 <label className="label">Join the conversation!</label>
                 <div className="control">
-                    <textarea 
+                    <textarea
                         className="textarea"
                         placeholder="Enter comment here..."
                         value={this.state.commentText}
@@ -37,13 +37,13 @@ class ArticleCommentForm extends React.Component {
         );
     }
 
-    handleChange (e) {
+    handleChange(e) {
         this.setState({
-            commentBody : e.target.value
+            commentBody: e.target.value
         })
     }
 
-    handleClick (e) {
+    handleClick(e) {
         e.preventDefault();
         this.props.postComment(this.props.article_id, this.state.commentBody);
         this.setState({

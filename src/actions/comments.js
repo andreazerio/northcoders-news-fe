@@ -1,6 +1,6 @@
 import * as types from '../types/index';
 import axios from 'axios';
-import {API_URL} from '../config'
+import { API_URL } from '../config'
 
 export const fetchCommentsRequest = article_id => ({
     type: types.FETCH_COMMENTS_REQUEST
@@ -35,7 +35,7 @@ export const putCommentRequest = (comment_id, vote) => ({
 });
 
 export const putCommentSuccess = data => ({
-    type:types.PUT_COMMENT_SUCCESS,
+    type: types.PUT_COMMENT_SUCCESS,
     payload: data
 });
 
@@ -46,17 +46,17 @@ export const putCommentFailure = err => ({
 
 export const deleteCommentRequest = comment_id => ({
     type: types.DELETE_COMMENT_REQUEST
-  });
-  
-  export const deleteCommentSuccess = comment_id => ({
+});
+
+export const deleteCommentSuccess = comment_id => ({
     type: types.DELETE_COMMENT_SUCCESS,
     payload: comment_id
-  });
-  
-  export const deleteCommentFailure = err => ({
+});
+
+export const deleteCommentFailure = err => ({
     type: types.DELETE_COMMENT_FAILURE,
     payload: err
-  });
+});
 
 export const fetchComments = article_id => {
     return (dispatch) => {
@@ -72,15 +72,15 @@ export const fetchComments = article_id => {
 };
 
 export const postComment = (article_id, body) => {
-    return(dispatch) => {
+    return (dispatch) => {
         dispatch(postCommentRequest(article_id, body));
-        return axios.post(`${API_URL}/articles/${article_id}/comments`, {comment: body})
-        .then(res => {
-            dispatch(postCommentSuccess(res.data.comment))
-        })
-        .catch(error => {
-            dispatch(postCommentFailure(error.message))
-        });
+        return axios.post(`${API_URL}/articles/${article_id}/comments`, { comment: body })
+            .then(res => {
+                dispatch(postCommentSuccess(res.data.comment))
+            })
+            .catch(error => {
+                dispatch(postCommentFailure(error.message))
+            });
     };
 };
 
@@ -89,25 +89,25 @@ export const putComment = (comment_id, vote) => {
         const PATH = `comments/${comment_id}?vote=${vote}`;
         dispatch(putCommentRequest(comment_id, vote));
         return axios.put(`${API_URL}/${PATH}`)
-        .then(res => {
-            dispatch(putCommentSuccess(res.data));
-        })
-        .catch(error => {
-            dispatch(putCommentFailure(error.message))
-        });
+            .then(res => {
+                dispatch(putCommentSuccess(res.data));
+            })
+            .catch(error => {
+                dispatch(putCommentFailure(error.message))
+            });
     };
-};  
+};
 
 export const deleteComment = (comment_id) => {
     return (dispatch) => {
         const PATH = `comments/${comment_id}`;
-      dispatch(deleteCommentRequest(comment_id));
-      return axios.delete(`${API_URL}/${PATH}`)
-        .then(() => {
-          dispatch(deleteCommentSuccess(comment_id));
-        })
-        .catch(error => {
-          dispatch(deleteCommentFailure(error.message));
-        });
+        dispatch(deleteCommentRequest(comment_id));
+        return axios.delete(`${API_URL}/${PATH}`)
+            .then(() => {
+                dispatch(deleteCommentSuccess(comment_id));
+            })
+            .catch(error => {
+                dispatch(deleteCommentFailure(error.message));
+            });
     };
-  };
+};
