@@ -27,14 +27,14 @@ export default (prevState = initialState, action) => {
         const error = action.payload;
         newState.loading = false;
         newState.error = error;
-        newState.data = [];
+        newState.data = prevState.data;
         return newState;
     }
     if (action.type === types.PUT_ARTICLE_REQUEST) {
         let newState = Object.assign({}, prevState);
         newState.loading = true;
         newState.error = null;
-        newState.data = [];
+        newState.data = prevState.data;
         return newState;
     }
     if (action.type === types.PUT_ARTICLE_SUCCESS) {
@@ -42,7 +42,10 @@ export default (prevState = initialState, action) => {
         const articles = action.payload;
         newState.loading = false;
         newState.error = null;
-        newState.data = articles;
+        newState.data = newState.data.map(article => {
+            if (article._id === articles._id) article.votes = articles.votes
+            return article
+        });
         return newState;
     }
     if (action.type === types.PUT_ARTICLE_FAILURE) {

@@ -1,64 +1,51 @@
 import React from 'react';
 import PT from 'prop-types';
 
-class ActionIcons extends React.Component {
-    constructor(props) {
-        super(props);
+const ActionIcons = ({voteComment, deleteComment, votes, created_by, voteArticle}) => {
+    const handleVoteUp = (event) => {
+        event.preventDefault();
+        voteComment ? voteComment('up') : voteArticle('up')
+    };
 
-        this.handleClickUp = this.handleClickUp.bind(this);
-        this.handleClickDown = this.handleClickDown.bind(this);
-        this.handleClickDelete = this.handleClickDelete.bind(this);
-    }
-    handleClickUp(e) {
-        e.preventDefault();
-        if (this.props.putArticle) this.props.articleVoteUp();
-        if (this.props.putComment) this.props.voteCommentUp();
-    }
+    const handleVoteDown = (event) => {
+        event.preventDefault();
+        voteComment ? voteComment('down') : voteArticle('down')
+    };
 
-    handleClickDown(e) {
-        e.preventDefault();
-        if (this.props.putArticle) this.props.articleVoteDown();
-        if (this.props.putComment) this.props.voteCommentDown();
+    const handleDelete = (event) => {
+        event.preventDefault();
+        deleteComment();
     }
 
-    handleClickDelete(e) {
-        e.preventDefault();
-        this.props.deleteSingleComment();
-    }
-
-    render() {
-        const style = {
-            margin: '10px'
-        }
-        return (
-            <div className="icons" style={{ display: 'flex' }}>
-                <button
-                    className="button"
-                    value="up"
-                    onClick={this.handleClickUp}
-                    style={style}
-                >
-                    <span uk-icon="icon: plus" ></span>
-                </button>
-                <button
-                    className="button"
-                    value="down"
-                    onClick={this.handleClickDown}
-                    style={style}
-                >
-                    <span uk-icon="icon: minus"></span>
-                </button>
-                {this.props.created_by === 'northcoder' ? <button style={style} className='button' onClick={this.handleClickDelete}><span uk-icon="icon: close" ></span></button> : <div></div>}
-            </div>
-        );
-    }
-
-    static PT = {
-        votes: PT.number.isRequired,
-        voteUp: PT.func.isRequired,
-        voteDown: PT.func.isRequired
-    }
+    return (
+        <div className="icons" style={{ display: 'block' }}>
+        {created_by === 'northcoder' ? <button style={{margin: '10px'}} className='uk-button uk-button-text' onClick={handleDelete}><span uk-icon="icon: close" ></span></button> : <div></div>}
+            <button
+                className="uk-button uk-button-text"
+                value="up"
+                onClick={handleVoteUp}
+                style={{margin: '10px', marginBottom: '10px'}}
+            >
+                <span uk-icon="icon: triangle-up" ></span>
+            </button>
+            <strong><p>{votes}</p></strong>
+            <button
+                className="uk-button uk-button-text"
+                value="down"
+                onClick={handleVoteDown}
+                style={{margin: '10px'}}
+            >
+                <span uk-icon="icon: triangle-down"></span>
+            </button>
+        </div>
+    );
 }
 
+ActionIcons.PT = {
+    votes : PT.number.isRequired,
+    created_by : PT.string.isRequired,
+    voteComment : PT.func.isRequired,
+    deleteComment : PT.func.isRequired
+}
 
 export default ActionIcons;

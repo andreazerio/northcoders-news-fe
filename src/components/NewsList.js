@@ -2,15 +2,12 @@ import React from 'react';
 import PT from 'prop-types';
 import { connect } from 'react-redux';
 import NewsItem from './NewsItem';
-import { fetchArticles, fetchArticlesByTopic } from '../actions/articles';
+import { fetchArticles, fetchArticlesByTopic, putArticle } from '../actions/articles';
 import { fetchComments } from '../actions/comments';
 
 class NewsList extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            articles: []
-        }
         this.sourceArticles = this.sourceArticles.bind(this)
     }
 
@@ -38,7 +35,9 @@ class NewsList extends React.Component {
 
     render() {
         const style = {
-            margin: '20px'
+            margin: '20px',
+            maxWidth: '65%',
+            marginLeft: '16%'
         }
         let { articles } = this.props;
         const order = this.props.match.url;
@@ -46,14 +45,15 @@ class NewsList extends React.Component {
             articles = articles.sort((a, b) => b.votes - a.votes);
         }
         return (
-            <div style={{ paddingTop: '15%' }}>
-                <h3 style={{ fontSize: '180%' }} >{this.props.loading ? "Loading " : ""}{order === '/' ? "Latest" : "Popular"} News Stories</h3>
+            <div style={{ paddingTop: '10%' }}>
+                <h3 style={{ fontSize: '160%' }} >{this.props.loading ? "Loading " : ""}{order === '/' ? "Latest" : "Popular"} News Stories</h3>
                 <ul className="uk-list">
                     {Array.isArray(articles) && articles.slice(0, 10).map((article, index) => {
                         return <li style={style} key={article._id}>
                             <NewsItem
                                 article={article}
                                 fetchComments={this.props.fetchComments}
+                                putArticle={this.props.putArticle}
                             />
                         </li>
                     })}
@@ -89,6 +89,9 @@ const mapDispatchToProps = dispatch => {
         },
         fetchComments: (article_id) => {
             dispatch(fetchComments(article_id))
+        },
+        putArticle: (article_id, vote) => {
+            dispatch(putArticle(article_id, vote))
         }
     }
 }

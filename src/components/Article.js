@@ -12,9 +12,6 @@ import { fetchComments, postComment, putComment, deleteComment } from '../action
 class Article extends React.Component {
     constructor(props) {
         super(props)
-
-        this.articleVoteUp = this.articleVoteUp.bind(this);
-        this.articleVoteDown = this.articleVoteDown.bind(this);
     }
 
     componentDidMount() {
@@ -22,23 +19,15 @@ class Article extends React.Component {
         this.props.fetchComments(this.props.match.params.id);
     }
 
-    articleVoteUp() {
-        this.props.putArticle(this.props.match.params.id, 'up');
-    }
-
-    articleVoteDown() {
-        this.props.putArticle(this.props.match.params.id, 'down');
-    }
-
     render() {
         const style = {
             marginBottom: '50px'
         }
-        let article = 'loading';
+        let article = '';
         if (this.props.article.article) article = this.props.article.article[0];
 
         return (
-            <div id='conditional'>
+            <div id=''>
                 {article !== undefined
                     ?
                     <div className="article" style={{ paddingTop: '12%' }}>
@@ -53,13 +42,7 @@ class Article extends React.Component {
                             </div>
 
                             <div id='footer' className="uk-card-footer">
-                                <h6>{this.props.comments.length} comments   {article.votes} votes </h6>
-                                <ActionIcons
-                                    votes={article.votes}
-                                    articleVoteUp={this.articleVoteUp}
-                                    articleVoteDown={this.articleVoteDown}
-                                    putArticle={this.props.putArticle}
-                                />
+                                <h6>{this.props.comments.length} comments</h6>
                             </div>
                         </div>
                         <div className="comments" >
@@ -93,13 +76,7 @@ class Article extends React.Component {
                             </div>
 
                             <div id='footer' className="uk-card-footer">
-                                <h6>{this.props.comments.length} comments   {this.props.article.article.votes} votes </h6>
-                                <ActionIcons
-                                    votes={this.props.article.article.votes}
-                                    articleVoteUp={this.articleVoteUp}
-                                    articleVoteDown={this.articleVoteDown}
-                                    putArticle={this.props.putArticle}
-                                />
+                                <h6>{this.props.comments.length} comments</h6>
                             </div>
                         </div>
                         <div className="comments" >
@@ -154,9 +131,6 @@ const mapDispatchToProps = dispatch => {
         },
         postComment: (article_id, body) => {
             dispatch(postComment(article_id, body))
-        },
-        putArticle: (article_id, vote) => {
-            dispatch(putArticle(article_id, vote))
         },
         putComment: (comment_id, vote) => {
             dispatch(putComment(comment_id, vote))

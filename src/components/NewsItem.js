@@ -1,16 +1,18 @@
 import React from 'react';
 import PT from 'prop-types';
 import { Link } from 'react-router-dom';
+import ActionIcons from './ActionIcons'
 
 class NewsItem extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             slice: 300,
-            toggle: false
+            toggle: false,
+            votes : this.props.article.votes
         }
-        this.handleClick = this.handleClick.bind(this)
-        this.showNextCharacter = this.showNextCharacter.bind(this)
+        this.handleClick = this.handleClick.bind(this);
+        this.voteArticle = this.voteArticle.bind(this);
     }
 
     handleClick(event) {
@@ -21,38 +23,42 @@ class NewsItem extends React.Component {
                 slice: event.target[key].memoizedProps.val,
                 toggle: true
             })
-
         }
         if (this.state.toggle) {
             this.setState({
                 slice: 300,
                 toggle: false
             })
-
-
         }
-
     }
 
-    showNextCharacter(num) {
+    voteArticle(vote) {
+        let increment;
+        vote === 'up' ? increment = 1 : increment = -1
+        this.props.putArticle(this.props.article._id, vote);
         this.setState({
-            slice: this.state.slice + 1
-        })
-        if (this.state.slice < num) {
-            setTimeout(this.showNextCharacter(num), 100)
-        }
+            votes: this.state.votes + increment
+        });
     }
 
     render() {
         return (
-            <div className="uk-card uk-card-default uk-card-hover uk-card-small">
-                <div id='cardHeader' className="uk-card-header">
+            <div className="uk-card uk-card-default uk-card-hover">
+                <div id='cardHeader' className="uk-card-header" style={{display: 'flex', padding: '0px'}}>
+                <div style={{maxWidth: '5%'}}>
+                <ActionIcons
+                        votes={this.state.votes}
+                        voteArticle={this.voteArticle}
+                />
+                </div>
+                <div style ={{display: 'block',width: '100%', textAlign: 'center', marginTop:'5%'}}>
                     <h3>{this.props.article.title}</h3>
                     <p>by {this.props.article.created_by}</p>
                 </div>
+                </div>
 
                 <div className="uk-card-body">
-                    <p>{this.props.article.body.slice(0, this.state.slice)}</p>
+                    <p style={{fontSize:'70%'}}>{this.props.article.body.slice(0, this.state.slice)}</p>
 
                     {this.props.article.body.length > 300 && <button
                         className="uk-button uk-button-text"
@@ -65,7 +71,7 @@ class NewsItem extends React.Component {
 
                 <div id='footer' className="uk-card-footer">
                     <Link to={`/articles/${this.props.article._id}`}>
-                        <h6>Comments and Votes</h6>
+                        <h6>Comment</h6>
                     </Link>
                 </div>
             </div>

@@ -65,8 +65,8 @@ export default (prevState = initialState, action) => {
         const comments = action.payload;
         newState.loading = false;
         newState.error = null;
-        newState.data = prevState.data.map(comment => {
-            if (comment._id === comments._id) comment = comments;
+        newState.data = newState.data.map(comment => {
+            if (comment._id === comments._id) comment.votes = comments.votes;
             return comment
         });
         return newState;

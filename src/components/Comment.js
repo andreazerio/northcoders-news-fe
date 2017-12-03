@@ -1,59 +1,45 @@
 import React from 'react';
 import PT from 'prop-types';
+import CommentCard from './CommentCard'
 import ActionIcons from './ActionIcons'
 
 class Comment extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            timesVoted: 0
+            votes: this.props.comment.votes
         }
-
-        this.voteCommentUp = this.voteCommentUp.bind(this);
-        this.voteCommentDown = this.voteCommentDown.bind(this);
-        this.deleteSingleComment = this.deleteSingleComment.bind(this);
+        this.deleteComment = this.deleteComment.bind(this);
+        this.voteComment = this.voteComment.bind(this);
     }
-    voteCommentUp() {
-        this.props.putComment(this.props.comment._id, 'up');
-        let numberOfVotes = this.state.timesVoted + 1
+
+    voteComment(vote) {
+        let increment;
+        vote === 'up' ? increment = 1 : increment = -1
+        this.props.putComment(this.props.comment._id, vote);
         this.setState({
-            timesVoted: numberOfVotes
+            votes: this.state.votes + increment
         });
     }
 
-    voteCommentDown() {
-        this.props.putComment(this.props.comment._id, 'down');
-        let numberOfVotes = this.state.timesVoted + 1
-        this.setState({
-            timesVoted: numberOfVotes
-        });
-    }
-
-    deleteSingleComment() {
+    deleteComment() {
         this.props.deleteComment(this.props.comment._id)
     }
 
-    componentDidMount() {
-        this.voteCommentUp();
-        this.voteCommentDown();
-    }
     render() {
         return (
-            <div>
-
-                <strong><h6>{this.props.comment.created_by}</h6></strong>
-                <p>
-                    {this.props.comment.body}
-                </p>
-                <strong>{this.props.comment.votes} Votes</strong>
-                <div className='icons' style={{ display: 'inline' }}>
+            <div style={{display:'flex', flex: 'inline'}}>
+                 <div className='icons' style={{ display: 'inline' }}>
                     <ActionIcons
-                        voteCommentUp={this.voteCommentUp}
-                        voteCommentDown={this.voteCommentDown}
-                        putComment={this.props.putComment}
+                        comment={this.props.comment}
                         created_by={this.props.comment.created_by}
-                        deleteSingleComment={this.deleteSingleComment}
+                        votes={this.state.votes}
+                        voteComment={this.voteComment}
+                        deleteComment={this.deleteComment}
                     />
+                </div>
+                <div>
+                <CommentCard comment={this.props.comment}/>
                 </div>
             </div>
         );
