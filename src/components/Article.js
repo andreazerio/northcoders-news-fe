@@ -20,9 +20,6 @@ class Article extends React.Component {
     }
 
     render() {
-        const style = {
-            marginBottom: '50px'
-        }
         let article = '';
         if (this.props.article.article) article = this.props.article.article[0];
 
@@ -31,7 +28,7 @@ class Article extends React.Component {
                 {article !== undefined
                     ?
                     <div className="article" style={{ paddingTop: '12%' }}>
-                        <div className="uk-card uk-card-default uk-card-hover uk-card-small" style={style}>
+                        <div className="uk-card uk-card-default uk-card-hover uk-card-small" style={{marginBottom: '50px', maxWidth: '65%', marginLeft: '16%'}}>
                             <div id='cardHeader' className="uk-card-header">
                                 <h3 style={{ fontSize: '150%' }}>{article.title}</h3>
                                 <p>by {article.created_by}</p>
@@ -46,11 +43,12 @@ class Article extends React.Component {
                             </div>
                         </div>
                         <div className="comments" >
-
+                        <div style={{maxWidth: '65%', marginLeft: '16%'}}>
                             <ArticleCommentForm
                                 article_id={article._id}
                                 postComment={this.props.postComment}
                             />
+                            </div>
                             <ArticleCommentList
                                 comments={this.props.comments}
                                 putComment={this.props.putComment}
@@ -64,8 +62,7 @@ class Article extends React.Component {
                     :
 
                     <div className="article" style={{ paddingTop: '12%' }}>
-                        {console.log('modified props', this.props)}
-                        <div className="uk-card uk-card-default uk-card-hover uk-card-small" style={style}>
+                        <div className="uk-card uk-card-default uk-card-hover uk-card-small" style={{marginBottom: '50px'}}>
                             <div id='cardHeader' className="uk-card-header">
                                 <h3>{this.props.article.article.title}</h3>
                                 <p>by {this.props.article.article.created_by}</p>
