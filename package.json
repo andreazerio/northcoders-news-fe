@@ -40,7 +40,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "mocha --require babel-register ./spec/*.spec.js",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "pretest": "npm run lint",
+    "lint": "eslint ./",
+    "lint:fix": "npm run lint -- --fix"
   },
   "babel": {
     "presets": [

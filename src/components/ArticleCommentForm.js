@@ -1,58 +1,62 @@
 import React from 'react';
+import PT from 'prop-types';
 
 class ArticleCommentForm extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            commentBody: ''
-        }
+    this.state = {
+      commentBody: ''
+    };
 
-        this.handleClick = this.handleClick.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
+    this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-    render() {
-        return (
-            <div className="field">
-                <label className="label">Join the conversation!</label>
-                <div className="control">
-                    <textarea
-                        className="textarea"
-                        placeholder="Enter comment here..."
-                        value={this.state.commentText}
-                        onChange={this.handleChange}
-                    >
-                    </textarea>
-                </div>
-                <div className="control">
-                    <button
-                        className="button is-link"
-                        onClick={this.handleClick}
-                    >
+  render() {
+    return (
+      <div className="field">
+        <label className="label">Join the conversation!</label>
+        <div className="control">
+          <textarea
+            className="textarea"
+            placeholder="Enter comment here..."
+            value={this.state.commentText}
+            onChange={this.handleChange}
+          >
+          </textarea>
+        </div>
+        <div className="control">
+          <button
+            className="button is-link"
+            onClick={this.handleClick}
+          >
                         Submit
-                    </button>
-                </div>
-            </div>
-        );
-    }
+          </button>
+        </div>
+      </div>
+    );
+  }
 
-    handleChange(e) {
-        this.setState({
-            commentBody: e.target.value
-        })
-    }
+  handleChange(e) {
+    this.setState({
+      commentBody: e.target.value
+    });
+  }
 
-    handleClick(e) {
-        e.preventDefault();
-        this.props.postComment(this.props.article_id, this.state.commentBody);
-        this.setState({
-            commentBody: ''
-        });
-    }
+  handleClick(e) {
+    e.preventDefault();
+    this.props.postComment(this.props.article_id, this.state.commentBody);
+    this.setState({
+      commentBody: ''
+    });
+  }
+
 }
-
-
+ArticleCommentForm.propTypes = {
+  postComment: PT.func.isRequired,
+  article_id: PT.string.isRequired
+};
 
 
 export default ArticleCommentForm;

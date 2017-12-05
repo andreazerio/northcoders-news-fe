@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './NavBar';
@@ -31,5 +31,5 @@ const App = () => (
       </div>
     </section>
   </BrowserRouter>
-)
+);
 export default App;

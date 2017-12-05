@@ -6,7 +6,7 @@ You can view the site by following [this link](https://floating-everglades-86530
 
 ## Setup
 
-You will need Node.js npm and git installed before being able to run this project.
+You will need Node.js v7.9.0 npm and git installed before being able to run this project.
 
 To check if Node.js is installed on your machine open a terminal window and enter:
 
