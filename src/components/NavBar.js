@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const NavBar = () => (
   <div>
-    <nav className="uk-navbar uk-navbar-container uk-margin" style={{ backgroundColor: 'rgba(0,0,0,0.8)', position: 'fixed', zIndex: '5', minWidth: '100%', marginTop: '0px', maxHeight: '13%' }}>
+    <nav className="uk-navbar uk-navbar-container uk-margin" style={{ backgroundColor: 'rgba(0,0,0,0.8)', position: 'fixed', zIndex: '5', minWidth: '100%', marginTop: '0px', height: '13%' }}>
       <button className="uk-button uk-button-secondary uk-margin-small-right" type="button" uk-toggle="target: #offcanvas-push"><span uk-icon="icon: menu" ></span></button>
       <div id="offcanvas-push" uk-offcanvas="mode: reveal; overlay: true">
         <div className="uk-offcanvas-bar">
@@ -43,7 +43,12 @@ const NavBar = () => (
           </ul>
         </div>
       </div>
-      <h1 style={{ fontSize: '200%', marginLeft: '17%', color: 'white', marginTop: '0.5%' }} className="uk-align-center">Northcoders <Link to="/"> <img src='https://cdn-images-1.medium.com/max/184/1*LdnSztHVYhhd8K8EqlgCJQ@2x.png' height='10%' width='12%' style={{ marginLeft: '80px', marginRight: '80px' }} /></Link> News</h1>
+      <div className='container' style={{display: 'flex', marginTop: '1%', justifyContent: 'center'}}>
+        <h1 style={{ fontSize: '250%', color: 'white'}}>NorthCoders</h1>
+        <Link to="/"> <img src='https://cdn-images-1.medium.com/max/184/1*LdnSztHVYhhd8K8EqlgCJQ@2x.png' width='36%'  /></Link>
+        <h1 style={{ fontSize: '250%', color: 'white'}}>News</h1>
+        <h1>Placeholder--------------</h1>
+      </div>
     </nav>
   </div>
 );
